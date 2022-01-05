@@ -1,5 +1,5 @@
 import 'package:kupol_app/components/role.dart';
-import 'package:kupol_app/components/user.dart';
+import 'package:kupol_app/components/user_model.dart';
 
 class UserService {
   List<User> _users = [
