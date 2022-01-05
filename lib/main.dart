@@ -1,7 +1,7 @@
 import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:kupol_app/security/events_screen.dart';
 import 'package:kupol_app/theme.dart';
-import 'package:kupol_app/welcome/login/login_screen.dart';
 
 void main() {
   return runApp(
@@ -32,6 +32,6 @@ class StartUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return LoginScreen();
+    return EventsScreen();
   }
 }

@@ -24,4 +24,8 @@ class Employee {
     required this.login,
     required this.password,
   });
+
+  String getName() {
+    return "$lastname ${firstname[0]}. ${patronymic[0]}.";
+  }
 }

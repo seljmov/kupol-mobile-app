@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 Map<int, Color> getSwatch(Color color) {
   final hslColor = HSLColor.fromColor(color);
@@ -27,6 +28,7 @@ final primaryMaterialColor = MaterialColor(
   primaryColor.value,
   getSwatch(primaryColor),
 );
+final secondaryColor = Color(0xFF02AFDD);
 final darkColor = Color(0xFF262626);
 final hintColor = Color(0xFFC0C0C0);
 final disableColor = Color(0xFFF5F5F5);
@@ -34,17 +36,63 @@ final underlineInputBorderPrimary = UnderlineInputBorder(
   borderSide: BorderSide(color: primaryColor),
 );
 
+final lightTextPrimaryColor = darkColor;
+final lightTextSecondaryColor = Color(0xFF888888);
+final lightTextDisableColor = disableColor;
+
 var lightThemeData = new ThemeData(
   primaryColor: primaryColor,
   primaryColorDark: primaryColor,
   primaryColorLight: primaryColor,
   primarySwatch: primaryMaterialColor,
+  secondaryHeaderColor: secondaryColor,
   scaffoldBackgroundColor: Color(0xFFFFFFFF),
   brightness: Brightness.light,
   hintColor: hintColor,
   fontFamily: "Open Sans",
   focusColor: primaryColor,
   disabledColor: disableColor,
+  indicatorColor: secondaryColor,
+  textTheme: TextTheme(
+    headline6: TextStyle(
+      color: lightTextPrimaryColor,
+    ),
+    bodyText1: TextStyle(
+      color: lightTextPrimaryColor,
+      fontSize: 18,
+    ),
+    bodyText2: TextStyle(
+      color: lightTextSecondaryColor,
+      fontSize: 14,
+    ),
+  ),
+  textSelectionTheme: TextSelectionThemeData(
+    selectionColor: secondaryColor,
+  ),
+  appBarTheme: AppBarTheme(
+    systemOverlayStyle: SystemUiOverlayStyle(
+      statusBarColor: Colors.transparent,
+    ),
+    backgroundColor: Colors.white,
+    foregroundColor: darkColor,
+    elevation: 0,
+    centerTitle: true,
+  ),
+  tabBarTheme: TabBarTheme(
+    indicatorSize: TabBarIndicatorSize.label,
+    labelColor: secondaryColor,
+    unselectedLabelColor: lightTextSecondaryColor,
+  ),
+  cardTheme: CardTheme(
+    elevation: 0,
+    shape: RoundedRectangleBorder(
+      side: BorderSide(
+        color: Color(0xFFE5E5E5),
+        width: 1.0,
+      ),
+      borderRadius: BorderRadius.circular(14.0),
+    ),
+  ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
       backgroundColor: MaterialStateProperty.all<Color>(primaryColor),
