@@ -59,11 +59,9 @@ var lightThemeData = new ThemeData(
     ),
     bodyText1: TextStyle(
       color: lightTextPrimaryColor,
-      fontSize: 18,
     ),
     bodyText2: TextStyle(
       color: lightTextSecondaryColor,
-      fontSize: 14,
     ),
   ),
   textSelectionTheme: TextSelectionThemeData(
@@ -95,9 +93,17 @@ var lightThemeData = new ThemeData(
   ),
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ButtonStyle(
+      elevation: MaterialStateProperty.all<double?>(0),
+      textStyle: MaterialStateProperty.all<TextStyle?>(
+        TextStyle(
+          fontSize: 16,
+          color: darkColor,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
       backgroundColor: MaterialStateProperty.all<Color>(primaryColor),
       foregroundColor: MaterialStateProperty.all<Color>(darkColor),
-      fixedSize: MaterialStateProperty.all<Size>(Size(360.0, 50.0)),
+      minimumSize: MaterialStateProperty.all<Size>(Size(360.0, 50.0)),
       shape: MaterialStateProperty.all<RoundedRectangleBorder>(
         RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(14.0),

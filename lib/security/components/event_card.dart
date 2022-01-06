@@ -34,7 +34,7 @@ class EventCard extends StatelessWidget {
     source = source.substring(0, length);
     source += "...";
 
-    return source;
+    return "${source.characters.take(length)}...";
   }
 
   String _getSubtitle() {
@@ -62,7 +62,12 @@ class EventCard extends StatelessWidget {
                       "lib/assets/icons/clock.svg",
                     ),
                     SizedBox(width: 8),
-                    Text(event.date),
+                    Text(
+                      event.date,
+                      style: TextStyle(
+                        color: Theme.of(context).textTheme.bodyText1?.color,
+                      ),
+                    ),
                     SizedBox(width: 8),
                     Card(
                       elevation: 0,
@@ -90,8 +95,12 @@ class EventCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      _smartSubstring(event.name, 30),
-                      style: TextStyle(fontWeight: FontWeight.w600),
+                      _smartSubstring(event.name, 26),
+                      style: TextStyle(
+                        fontSize: 18,
+                        color: Theme.of(context).textTheme.bodyText1?.color,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                     SvgPicture.asset(
                       "lib/assets/icons/right_arrow.svg",
@@ -100,6 +109,10 @@ class EventCard extends StatelessWidget {
                 ),
                 Text(
                   _getSubtitle(),
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Theme.of(context).textTheme.bodyText2?.color,
+                  ),
                 ),
               ],
             ),
