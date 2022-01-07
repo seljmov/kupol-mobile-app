@@ -12,6 +12,7 @@ dependencies:
 
   cupertino_icons: ^1.0.2
   easy_dynamic_theme: ^2.2.0
+  image_picker: ^0.8.4+4
   flutter_svg: ^1.0.0
 
 dev_dependencies:
@@ -31,3 +32,4 @@ flutter:
   assets:
     - lib/assets/
     - lib/assets/icons/
+    - lib/assets/images/

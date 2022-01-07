@@ -12,6 +12,9 @@ class EventsRepository {
       address: "ООО Зеленые сады",
       description: "Сотрудник распивает алкоголь на территории строительства",
       date: "26.12.2021, 20:31",
+      images: [
+        "lib/assets/images/img1.png",
+      ],
     ),
     Event(
       id: 1,
@@ -34,6 +37,10 @@ class EventsRepository {
       description:
           "Необходимо проверить работоспособность камер видеонаблюдения на территории локации",
       date: "26.12.2021, 15:22",
+      images: [
+        "lib/assets/images/img_camera1.png",
+        "lib/assets/images/img_camera2.png",
+      ],
     ),
     Event(
       id: 3,
@@ -45,6 +52,9 @@ class EventsRepository {
       address: "ООО Зеленые сады",
       description: "Сотрудник распивает алкоголь на территории строительства",
       date: "26.12.2021, 19:43",
+      images: [
+        "lib/assets/images/img1.png",
+      ],
     ),
     Event(
       id: 4,
@@ -56,6 +66,9 @@ class EventsRepository {
       address: "ООО Зеленые сады",
       description: "Сотрудник распивает алкоголь на территории строительства",
       date: "26.12.2021, 19:43",
+      images: [
+        "lib/assets/images/img1.png",
+      ],
     ),
   ];
 

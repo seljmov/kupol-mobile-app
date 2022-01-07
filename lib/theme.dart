@@ -41,6 +41,13 @@ final lightTextSecondaryColor = Color(0xFF888888);
 final lightTextDisableColor = disableColor;
 
 var lightThemeData = new ThemeData(
+  snackBarTheme: SnackBarThemeData(
+    backgroundColor: Colors.white,
+    disabledActionTextColor: disableColor,
+    contentTextStyle: TextStyle(
+      color: darkColor,
+    ),
+  ),
   primaryColor: primaryColor,
   primaryColorDark: primaryColor,
   primaryColorLight: primaryColor,
@@ -68,9 +75,7 @@ var lightThemeData = new ThemeData(
     selectionColor: secondaryColor,
   ),
   appBarTheme: AppBarTheme(
-    systemOverlayStyle: SystemUiOverlayStyle(
-      statusBarColor: Colors.transparent,
-    ),
+    systemOverlayStyle: SystemUiOverlayStyle.dark,
     backgroundColor: Colors.white,
     foregroundColor: darkColor,
     elevation: 0,

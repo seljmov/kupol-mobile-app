@@ -26,6 +26,6 @@ class Employee {
   });
 
   String getName() {
-    return "$lastname ${firstname[0]}. ${patronymic[0]}.";
+    return "$lastname ${firstname[0]}.${patronymic[0]}.";
   }
 }

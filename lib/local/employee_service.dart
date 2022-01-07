@@ -37,4 +37,10 @@ class EmployeeService {
   Future<Employee?> getEmployeeByLogin(String login) async {
     return _employees.firstWhereOrNull((employee) => employee.login == login);
   }
+
+  Employee? getEmployeeByFullname(String fullname) {
+    return _employees.firstWhereOrNull(
+      (employee) => employee.getName() == fullname,
+    );
+  }
 }

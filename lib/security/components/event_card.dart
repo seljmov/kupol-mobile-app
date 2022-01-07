@@ -1,39 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:kupol_app/components/employee_model.dart';
-import 'package:kupol_app/constants.dart';
-import 'package:kupol_app/local/employee_service.dart';
 import 'package:kupol_app/security/components/event_model.dart';
 import 'package:kupol_app/security/components/event_status.dart';
+import 'package:kupol_app/security/components/event_status_card.dart';
+import 'package:kupol_app/security/event_detail_screen.dart';
 
 class EventCard extends StatelessWidget {
   EventCard({Key? key, required this.event}) : super(key: key);
 
   final Event event;
 
-  Color _getStatusColor(EventStatus status) {
-    if (status == EventStatus.New) return kEventNewStatusColor;
-    if (status == EventStatus.AtWork) return kEventNewAtWorkColor;
-    if (status == EventStatus.OnVerification)
-      return kEventOnVerificationStatusColor;
-    if (status == EventStatus.Completed) return kEventCompletedStatusColor;
-    return kEventNewAtWorkColor;
-  }
-
-  String _getStatusName(EventStatus status) {
-    if (status == EventStatus.New) return "Новое";
-    if (status == EventStatus.AtWork) return "В работе";
-    if (status == EventStatus.OnVerification) return "На проверке";
-    if (status == EventStatus.Completed) return "Завершено";
-    return "";
-  }
-
   String _smartSubstring(String source, int length) {
-    if (source.length <= length) return source;
-
-    source = source.substring(0, length);
-    source += "...";
-
     return "${source.characters.take(length)}...";
   }
 
@@ -45,86 +22,78 @@ class EventCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: 20,
-          horizontal: 16,
-        ),
-        child: Column(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Row(
-                  children: [
-                    SvgPicture.asset(
-                      "lib/assets/icons/clock.svg",
-                    ),
-                    SizedBox(width: 8),
-                    Text(
-                      event.date,
-                      style: TextStyle(
-                        color: Theme.of(context).textTheme.bodyText1?.color,
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => EventDetailScreen(event: event),
+          ),
+        );
+      },
+      child: Card(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: 20,
+            horizontal: 16,
+          ),
+          child: Column(
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Row(
+                    children: [
+                      SvgPicture.asset(
+                        "lib/assets/icons/clock.svg",
                       ),
-                    ),
-                    SizedBox(width: 8),
-                    Card(
-                      elevation: 0,
-                      color: _getStatusColor(event.status),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(6.0),
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 4,
-                          horizontal: 8,
-                        ),
-                        child: Text(
-                          _getStatusName(event.status),
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
+                      SizedBox(width: 8),
+                      Text(
+                        event.date,
+                        style: TextStyle(
+                          color: Theme.of(context).textTheme.bodyText1?.color,
                         ),
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(height: 8),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      _smartSubstring(event.name, 26),
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Theme.of(context).textTheme.bodyText1?.color,
-                        fontWeight: FontWeight.w600,
+                      SizedBox(width: 8),
+                      EventStatusCard(status: event.status),
+                    ],
+                  ),
+                  SizedBox(height: 8),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        _smartSubstring(event.name, 26),
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Theme.of(context).textTheme.bodyText1?.color,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
+                      SvgPicture.asset(
+                        "lib/assets/icons/right_arrow.svg",
+                      ),
+                    ],
+                  ),
+                  Text(
+                    _getSubtitle(),
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Theme.of(context).textTheme.bodyText2?.color,
                     ),
-                    SvgPicture.asset(
-                      "lib/assets/icons/right_arrow.svg",
-                    ),
-                  ],
-                ),
-                Text(
-                  _getSubtitle(),
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: Theme.of(context).textTheme.bodyText2?.color,
+                  ),
+                ],
+              ),
+              if (event.status == EventStatus.New)
+                Padding(
+                  padding: const EdgeInsets.only(top: 12),
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: Text("Взять в работу"),
                   ),
                 ),
-              ],
-            ),
-            if (event.status == EventStatus.New)
-              Padding(
-                padding: const EdgeInsets.only(top: 12),
-                child: ElevatedButton(
-                  onPressed: () {},
-                  child: Text("Взять в работу"),
-                ),
-              ),
-          ],
+            ],
+          ),
         ),
       ),
     );
