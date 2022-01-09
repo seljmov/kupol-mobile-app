@@ -1,3 +1,4 @@
+import 'package:kupol_app/components/employee_repository.dart';
 import 'package:kupol_app/local/employee_service.dart';
 
 class AuthRepository {
@@ -12,6 +13,7 @@ class AuthRepository {
       return "error:Пароль введен неверно!";
     }
 
+    await EmployeeRepository().saveEmployeeInfo(user.toJson());
     return "ok";
   }
 }

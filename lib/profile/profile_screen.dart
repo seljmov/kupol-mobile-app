@@ -1,16 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kupol_app/components/employee_model.dart';
+import 'package:kupol_app/components/employee_repository.dart';
 import 'package:kupol_app/constants.dart';
 import 'package:kupol_app/profile/components/default_profile_avatar.dart';
 import 'package:kupol_app/profile/components/edit_avatar_button.dart';
 import 'package:kupol_app/theme.dart';
+import 'package:kupol_app/welcome/login/login_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   ProfileScreen({Key? key, required this.employee}) : super(key: key);
 
   final Employee employee;
   final _editableNotifier = ValueNotifier<bool>(false);
+
+  Future<void> _logoutEmployee(BuildContext context) async {
+    await EmployeeRepository().removeInfo();
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(
+        builder: (context) => LoginScreen(),
+      ),
+      (Route<dynamic> route) => false,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -141,7 +154,35 @@ class ProfileScreen extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                     height: 50,
                     child: TextButton(
-                      onPressed: () {},
+                      onPressed: () => showDialog<String>(
+                        barrierColor: Colors.black87,
+                        context: context,
+                        builder: (BuildContext context) => AlertDialog(
+                          title: const Text(
+                            "Вы точно хотите выйти?",
+                          ),
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.pop(context),
+                              child: const Text(
+                                "Отменить",
+                                style: TextStyle(color: Colors.grey),
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () async {
+                                await _logoutEmployee(context);
+                              },
+                              child: const Text(
+                                "Да",
+                                style: TextStyle(
+                                  color: Colors.redAccent,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                       style: ButtonStyle(
                         shape:
                             MaterialStateProperty.all<RoundedRectangleBorder>(
