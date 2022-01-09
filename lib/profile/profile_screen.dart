@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kupol_app/components/employee_model.dart';
 import 'package:kupol_app/components/employee_repository.dart';
+import 'package:kupol_app/components/image_selector.dart';
 import 'package:kupol_app/constants.dart';
 import 'package:kupol_app/profile/components/default_profile_avatar.dart';
 import 'package:kupol_app/profile/components/edit_avatar_button.dart';
@@ -12,6 +15,7 @@ class ProfileScreen extends StatelessWidget {
   ProfileScreen({Key? key}) : super(key: key);
 
   final _editableNotifier = ValueNotifier<bool>(false);
+  final _profileImageNotifier = ValueNotifier<File?>(null);
 
   Future<void> _logoutEmployee(BuildContext context) async {
     await EmployeeRepository().removeInfo();
@@ -21,6 +25,64 @@ class ProfileScreen extends StatelessWidget {
         builder: (context) => LoginScreen(),
       ),
       (Route<dynamic> route) => false,
+    );
+  }
+
+  Future<void> _updateInfo(
+      BuildContext context, Employee employee, String phone) async {
+    var newEmployee = Employee(
+      id: employee.id,
+      lastname: employee.lastname,
+      firstname: employee.firstname,
+      patronymic: employee.patronymic,
+      phone: phone,
+      address: employee.address,
+      role: employee.role,
+      pin: employee.pin,
+      login: employee.login,
+      password: employee.password,
+    );
+    await EmployeeRepository().removeInfo();
+    await EmployeeRepository().saveEmployeeInfo(
+      newEmployee.toJson(),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        behavior: SnackBarBehavior.floating,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(12.0),
+        ),
+        content: Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: 10,
+            horizontal: 15,
+          ),
+          child: Row(
+            children: [
+              SvgPicture.asset(
+                "lib/assets/icons/success.svg",
+              ),
+              SizedBox(width: 25),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Text(
+                      "Ваше данные успешно обновлены",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 
@@ -36,6 +98,7 @@ class ProfileScreen extends StatelessWidget {
         }
 
         var employee = snapshot.data!;
+        var _phoneController = TextEditingController(text: employee.phone);
         return ValueListenableBuilder<bool>(
           valueListenable: _editableNotifier,
           builder: (context, isEditable, child) {
@@ -58,7 +121,9 @@ class ProfileScreen extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(right: 20),
                       child: GestureDetector(
-                        onTap: () {
+                        onTap: () async {
+                          var phone = _phoneController.text;
+                          await _updateInfo(context, employee, phone);
                           _editableNotifier.value = false;
                         },
                         child: Icon(Icons.check_rounded),
@@ -80,15 +145,38 @@ class ProfileScreen extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            Stack(
-                              children: [
-                                DefaultProfileAvatar(),
-                                Positioned(
-                                  right: 0,
-                                  bottom: 0,
-                                  child: EditAvatarButton(),
-                                ),
-                              ],
+                            ValueListenableBuilder<File?>(
+                              valueListenable: _profileImageNotifier,
+                              builder: (context, file, child) {
+                                return Stack(
+                                  children: [
+                                    file == null
+                                        ? DefaultProfileAvatar()
+                                        : ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(40.0),
+                                            child: Image.file(
+                                              file,
+                                              height: 80,
+                                            ),
+                                          ),
+                                    Positioned(
+                                      right: 0,
+                                      bottom: 0,
+                                      child: GestureDetector(
+                                        onTap: () async {
+                                          var file = await ImageSeletor()
+                                              .select(context);
+                                          if (file != null) {
+                                            _profileImageNotifier.value = file;
+                                          }
+                                        },
+                                        child: EditAvatarButton(),
+                                      ),
+                                    ),
+                                  ],
+                                );
+                              },
                             ),
                             SizedBox(width: 20),
                             Expanded(
@@ -134,9 +222,10 @@ class ProfileScreen extends StatelessWidget {
                         ),
                         SizedBox(height: 10),
                         TextFormField(
+                          controller: _phoneController,
                           readOnly: !isEditable,
+                          keyboardType: TextInputType.number,
                           decoration: InputDecoration(
-                            hintText: employee.phone,
                             labelText: "Телефон",
                             hintStyle: TextStyle(
                               color:
