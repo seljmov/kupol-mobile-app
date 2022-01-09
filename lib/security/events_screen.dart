@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:kupol_app/local/employee_service.dart';
+import 'package:kupol_app/profile/profile_screen.dart';
 import 'package:kupol_app/security/events_tabs/completed_events_screen.dart';
 import 'package:kupol_app/security/events_tabs/new_events_screen.dart';
 import 'package:kupol_app/security/events_tabs/work_events_screen.dart';
@@ -19,8 +21,17 @@ class EventsScreen extends StatelessWidget {
             MaterialButton(
               splashColor: Colors.transparent,
               highlightColor: Colors.transparent,
-              onPressed: () {
+              onPressed: () async {
                 print("Profile button on pressed!");
+                var employee = await EmployeeService().getEmployeeById(0);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ProfileScreen(
+                      employee: employee,
+                    ),
+                  ),
+                );
               },
               child: SvgPicture.asset(
                 "lib/assets/icons/user.svg",

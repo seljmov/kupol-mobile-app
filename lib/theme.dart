@@ -44,6 +44,7 @@ var lightThemeData = new ThemeData(
   snackBarTheme: SnackBarThemeData(
     backgroundColor: Colors.white,
     disabledActionTextColor: disableColor,
+    behavior: SnackBarBehavior.floating,
     contentTextStyle: TextStyle(
       color: darkColor,
     ),

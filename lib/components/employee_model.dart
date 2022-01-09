@@ -28,4 +28,8 @@ class Employee {
   String getName() {
     return "$lastname ${firstname[0]}.${patronymic[0]}.";
   }
+
+  String getFullname() {
+    return "$lastname $firstname $patronymic";
+  }
 }

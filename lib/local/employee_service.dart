@@ -1,5 +1,5 @@
 import 'package:kupol_app/components/role.dart';
-import 'package:kupol_app/components/Employee_model.dart';
+import 'package:kupol_app/components/employee_model.dart';
 import 'package:collection/collection.dart';
 
 class EmployeeService {
@@ -30,16 +30,16 @@ class EmployeeService {
     ),
   ];
 
-  Future<Employee?> getEmployeeById(int id) async {
-    return _employees.firstWhereOrNull((employee) => employee.id == id);
+  Future<Employee> getEmployeeById(int id) async {
+    return _employees.firstWhere((employee) => employee.id == id);
   }
 
   Future<Employee?> getEmployeeByLogin(String login) async {
     return _employees.firstWhereOrNull((employee) => employee.login == login);
   }
 
-  Employee? getEmployeeByFullname(String fullname) {
-    return _employees.firstWhereOrNull(
+  Employee getEmployeeByFullname(String fullname) {
+    return _employees.firstWhere(
       (employee) => employee.getName() == fullname,
     );
   }
