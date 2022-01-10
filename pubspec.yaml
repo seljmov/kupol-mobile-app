@@ -25,10 +25,8 @@ dev_dependencies:
 flutter_icons:
   ios: true
   android: true
-  image_path_ios: "lib/assets/logo/app_logo.jpg"
-  image_path_android: "lib/assets/logo/app_logo.jpg"
-  adaptive_icon_background: "#FFFFFF"
-  adaptive_icon_foreground: "lib/assets/logo/app_logo_foreground.png"
+  image_path_ios: "lib/assets/logo/app_logo_ios.jpg"
+  image_path_android: "lib/assets/logo/app_logo_ios.jpg"
 
 flutter:
   uses-material-design: true
