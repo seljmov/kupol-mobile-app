@@ -43,5 +43,7 @@
 	<false/>
 	<key>NSCameraUsageDescription</key>
 	<string>Приложение использует камеру для обновления аватара профиля</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Приложение использует галерею для обновления аватара профиля</string>
 </dict>
 </plist>
