@@ -10,10 +10,6 @@ class EventCard extends StatelessWidget {
 
   final Event event;
 
-  String _smartSubstring(String source, int length) {
-    return "${source.characters.take(length)}...";
-  }
-
   String _getSubtitle() {
     return event.status == EventStatus.New
         ? event.address
@@ -62,12 +58,15 @@ class EventCard extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        _smartSubstring(event.name, 26),
-                        style: TextStyle(
-                          fontSize: 18,
-                          color: Theme.of(context).textTheme.bodyText1?.color,
-                          fontWeight: FontWeight.w600,
+                      Expanded(
+                        child: Text(
+                          event.name,
+                          overflow: TextOverflow.ellipsis,
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Theme.of(context).textTheme.bodyText1?.color,
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
                       ),
                       SvgPicture.asset(
