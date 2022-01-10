@@ -158,6 +158,8 @@ class ProfileScreen extends StatelessWidget {
                                             child: Image.file(
                                               file,
                                               height: 80,
+                                              width: 80,
+                                              fit: BoxFit.fitHeight,
                                             ),
                                           ),
                                     Positioned(
