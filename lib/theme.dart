@@ -31,24 +31,21 @@ final primaryMaterialColor = MaterialColor(
 final secondaryColor = Color(0xFF02AFDD);
 final darkColor = Color(0xFF262626);
 final hintColor = Color(0xFFC0C0C0);
-final disableColor = Color(0xFFF5F5F5);
 final underlineInputBorderPrimary = UnderlineInputBorder(
   borderSide: BorderSide(color: primaryColor),
 );
 
+final lightDisableColor = Color(0xFFF5F5F5);
 final lightTextPrimaryColor = darkColor;
 final lightTextSecondaryColor = Color(0xFF888888);
-final lightTextDisableColor = disableColor;
+final lightTextDisableColor = lightDisableColor;
+
+final darkDisableColor = Color(0xFF333333);
+final darkTextPrimaryColor = Colors.white;
+final darkTextSecondaryColor = Color(0xFF888888);
+final darkTextDisableColor = darkDisableColor;
 
 var lightThemeData = new ThemeData(
-  snackBarTheme: SnackBarThemeData(
-    backgroundColor: Colors.white,
-    disabledActionTextColor: disableColor,
-    behavior: SnackBarBehavior.floating,
-    contentTextStyle: TextStyle(
-      color: darkColor,
-    ),
-  ),
   primaryColor: primaryColor,
   primaryColorDark: primaryColor,
   primaryColorLight: primaryColor,
@@ -59,7 +56,7 @@ var lightThemeData = new ThemeData(
   hintColor: hintColor,
   fontFamily: "Open Sans",
   focusColor: primaryColor,
-  disabledColor: disableColor,
+  disabledColor: lightDisableColor,
   indicatorColor: secondaryColor,
   textTheme: TextTheme(
     headline6: TextStyle(
@@ -86,6 +83,14 @@ var lightThemeData = new ThemeData(
     indicatorSize: TabBarIndicatorSize.label,
     labelColor: secondaryColor,
     unselectedLabelColor: lightTextSecondaryColor,
+  ),
+  snackBarTheme: SnackBarThemeData(
+    backgroundColor: Colors.white,
+    disabledActionTextColor: lightDisableColor,
+    behavior: SnackBarBehavior.floating,
+    contentTextStyle: TextStyle(
+      color: darkColor,
+    ),
   ),
   cardTheme: CardTheme(
     elevation: 0,
@@ -121,7 +126,78 @@ var lightThemeData = new ThemeData(
 
 var darkThemeData = ThemeData(
   primaryColor: primaryColor,
-  textTheme: new TextTheme(button: TextStyle(color: Colors.black54)),
-  scaffoldBackgroundColor: Color(0xFF262626),
+  primaryColorDark: primaryColor,
+  primaryColorLight: primaryColor,
+  primarySwatch: primaryMaterialColor,
+  secondaryHeaderColor: secondaryColor,
+  scaffoldBackgroundColor: darkColor,
   brightness: Brightness.dark,
+  hintColor: hintColor,
+  fontFamily: "Open Sans",
+  focusColor: primaryColor,
+  disabledColor: darkDisableColor,
+  indicatorColor: secondaryColor,
+  textTheme: TextTheme(
+    headline6: TextStyle(
+      color: darkTextPrimaryColor,
+    ),
+    bodyText1: TextStyle(
+      color: darkTextPrimaryColor,
+    ),
+    bodyText2: TextStyle(
+      color: darkTextSecondaryColor,
+    ),
+  ),
+  textSelectionTheme: TextSelectionThemeData(
+    selectionColor: secondaryColor,
+  ),
+  appBarTheme: AppBarTheme(
+    systemOverlayStyle: SystemUiOverlayStyle.light,
+    backgroundColor: darkColor,
+    foregroundColor: darkTextPrimaryColor,
+    elevation: 0,
+    centerTitle: true,
+  ),
+  tabBarTheme: TabBarTheme(
+    indicatorSize: TabBarIndicatorSize.label,
+    labelColor: secondaryColor,
+    unselectedLabelColor: darkTextSecondaryColor,
+  ),
+  snackBarTheme: SnackBarThemeData(
+    backgroundColor: darkDisableColor,
+    behavior: SnackBarBehavior.floating,
+    contentTextStyle: TextStyle(
+      color: darkTextPrimaryColor,
+    ),
+  ),
+  cardTheme: CardTheme(
+    elevation: 0,
+    shape: RoundedRectangleBorder(
+      side: BorderSide(
+        color: Color(0xFF4F4F4F),
+        width: 1.0,
+      ),
+      borderRadius: BorderRadius.circular(14.0),
+    ),
+  ),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ButtonStyle(
+      elevation: MaterialStateProperty.all<double?>(0),
+      textStyle: MaterialStateProperty.all<TextStyle?>(
+        TextStyle(
+          fontSize: 16,
+          color: darkColor,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+      backgroundColor: MaterialStateProperty.all<Color>(primaryColor),
+      foregroundColor: MaterialStateProperty.all<Color>(darkColor),
+      minimumSize: MaterialStateProperty.all<Size>(Size(360.0, 50.0)),
+      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(14.0),
+        ),
+      ),
+    ),
+  ),
 );
