@@ -22,7 +22,12 @@ class ImageSeletor {
     File? file;
     await showModalBottomSheet(
       context: context,
-      //backgroundColor: kBackgroundColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
+      ),
       builder: (BuildContext context) => Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.center,

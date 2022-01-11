@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:kupol_app/components/full_screen_view.dart';
 import 'package:kupol_app/security/components/event_model.dart';
 import 'package:kupol_app/security/components/event_status_card.dart';
 import 'package:kupol_app/security/components/event_technical_details_card.dart';
@@ -73,8 +74,22 @@ class CompletedEventDetailScreen extends StatelessWidget {
                 children: List.generate(
                   event.images!.length,
                   (index) {
-                    return Image.asset(
-                      event.images![index],
+                    return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => FullScreenView(
+                              child: Image.asset(
+                                event.images![index],
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                      child: Image.asset(
+                        event.images![index],
+                      ),
                     );
                   },
                 ),
@@ -106,9 +121,41 @@ class CompletedEventDetailScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Image.asset("lib/assets/images/journal1.png"),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => FullScreenView(
+                        child: Image.asset(
+                          "lib/assets/images/journal1.png",
+                        ),
+                      ),
+                    ),
+                  );
+                },
+                child: Image.asset(
+                  "lib/assets/images/journal1.png",
+                ),
+              ),
               SizedBox(width: 12),
-              Image.asset("lib/assets/images/journal2.png"),
+              GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => FullScreenView(
+                        child: Image.asset(
+                          "lib/assets/images/journal2.png",
+                        ),
+                      ),
+                    ),
+                  );
+                },
+                child: Image.asset(
+                  "lib/assets/images/journal2.png",
+                ),
+              ),
             ],
           ),
           SizedBox(height: 30),

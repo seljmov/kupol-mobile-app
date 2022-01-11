@@ -21,7 +21,7 @@ class EmployeeService {
       lastname: "Иванов",
       firstname: "Иван",
       patronymic: "Иванович",
-      phone: "79887893992",
+      phone: "7 (988) 789-39-92",
       address: "Морская ул., 123/5, Москва",
       role: Role.technician,
       pin: "1235",

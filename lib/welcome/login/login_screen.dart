@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kupol_app/constants.dart';
 import 'package:kupol_app/security/events_screen.dart';
 import 'package:kupol_app/welcome/repositories/auth_repository.dart';
@@ -18,14 +19,31 @@ class LoginScreen extends StatelessWidget {
       var message = response.split(errorPattern).last;
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          backgroundColor: Colors.redAccent,
-          content: Text(
-            message,
+          behavior: SnackBarBehavior.floating,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12.0),
           ),
-          action: SnackBarAction(
-            onPressed: () {},
-            label: "ОК",
-            textColor: Colors.white,
+          content: Padding(
+            padding: const EdgeInsets.symmetric(
+              vertical: 10,
+              horizontal: 15,
+            ),
+            child: Row(
+              children: [
+                SvgPicture.asset(
+                  "lib/assets/icons/error.svg",
+                ),
+                SizedBox(width: 25),
+                Expanded(
+                  child: Text(
+                    message,
+                    style: TextStyle(
+                      fontSize: 16,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       );
@@ -42,49 +60,58 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      body: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: 128,
-          horizontal: 36,
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Image.asset(
-              "lib/assets/logo.png",
-              height: 200,
-            ),
-            SizedBox(height: 24),
-            TextFormField(
-              controller: _loginController,
-              decoration: const InputDecoration(
-                hintText: "Введите логин",
-                labelText: "Логин",
-                floatingLabelBehavior: FloatingLabelBehavior.always,
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+      child: Scaffold(
+        resizeToAvoidBottomInset: false,
+        body: Padding(
+          padding: const EdgeInsets.symmetric(
+            vertical: 128,
+            horizontal: 36,
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Image.asset(
+                "lib/assets/logo.png",
+                height: 200,
               ),
-            ),
-            SizedBox(height: 10),
-            TextFormField(
-              obscureText: true,
-              controller: _passwordController,
-              decoration: const InputDecoration(
-                hintText: "Введите пароль",
-                labelText: "Пароль",
-                floatingLabelBehavior: FloatingLabelBehavior.always,
+              SizedBox(height: 24),
+              TextFormField(
+                style: TextStyle(
+                  color: Theme.of(context).textTheme.bodyText2?.color,
+                ),
+                controller: _loginController,
+                decoration: const InputDecoration(
+                  hintText: "Введите логин",
+                  labelText: "Логин",
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                ),
               ),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () async => _authorizeUser(
-                context,
-                _loginController.text,
-                _passwordController.text,
+              SizedBox(height: 10),
+              TextFormField(
+                style: TextStyle(
+                  color: Theme.of(context).textTheme.bodyText2?.color,
+                ),
+                obscureText: true,
+                controller: _passwordController,
+                decoration: const InputDecoration(
+                  hintText: "Введите пароль",
+                  labelText: "Пароль",
+                  floatingLabelBehavior: FloatingLabelBehavior.always,
+                ),
               ),
-              child: Text("Войти"),
-            ),
-          ],
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () async => _authorizeUser(
+                  context,
+                  _loginController.text,
+                  _passwordController.text,
+                ),
+                child: Text("Войти"),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -14,6 +14,7 @@ class EventsScreen extends StatelessWidget {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text("События"),
           centerTitle: true,
@@ -37,10 +38,11 @@ class EventsScreen extends StatelessWidget {
             ),
           ],
           bottom: TabBar(
+            labelPadding: EdgeInsets.zero,
             tabs: [
-              Tab(text: "Новое"),
+              Tab(text: "Новые"),
               Tab(text: "В работе"),
-              Tab(text: "Завершенное"),
+              Tab(text: "Завершенные"),
             ],
           ),
         ),

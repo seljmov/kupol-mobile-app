@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:kupol_app/components/full_screen_view.dart';
 import 'package:kupol_app/components/image_select_button.dart';
 import 'package:kupol_app/security/components/event_model.dart';
 import 'package:kupol_app/security/components/event_status_card.dart';
@@ -136,8 +137,22 @@ class AtWorkEventDetailScreen extends StatelessWidget {
                     children: List.generate(
                       event.images!.length,
                       (index) {
-                        return Image.asset(
-                          event.images![index],
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => FullScreenView(
+                                  child: Image.asset(
+                                    event.images![index],
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                          child: Image.asset(
+                            event.images![index],
+                          ),
                         );
                       },
                     ),
@@ -196,14 +211,29 @@ class AtWorkEventDetailScreen extends StatelessWidget {
                           children: List.generate(
                             files.length,
                             (index) => Stack(
-                              clipBehavior: Clip.none,
+                              alignment: Alignment.center,
                               children: [
-                                ClipRRect(
-                                  borderRadius: BorderRadius.circular(12.0),
-                                  child: Image.file(
-                                    files[index]!,
-                                    fit: BoxFit.fitHeight,
-                                    height: 100,
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => FullScreenView(
+                                          child: Image.file(
+                                            files[index]!,
+                                            fit: BoxFit.fitWidth,
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(12.0),
+                                    child: Image.file(
+                                      files[index]!,
+                                      height: 100,
+                                      fit: BoxFit.fitHeight,
+                                    ),
                                   ),
                                 ),
                                 Positioned.fill(
@@ -217,6 +247,9 @@ class AtWorkEventDetailScreen extends StatelessWidget {
                                       },
                                       child: SvgPicture.asset(
                                         "lib/assets/icons/button_delete.svg",
+                                        width: 40,
+                                        height: 40,
+                                        fit: BoxFit.fill,
                                       ),
                                     ),
                                   ),

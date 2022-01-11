@@ -24,9 +24,9 @@ Map<int, Color> getSwatch(Color color) {
 }
 
 final primaryColor = Color(0xFFFFCD1A);
-final primaryMaterialColor = MaterialColor(
-  primaryColor.value,
-  getSwatch(primaryColor),
+final secondaryMaterialColor = MaterialColor(
+  secondaryColor.value,
+  getSwatch(secondaryColor),
 );
 final secondaryColor = Color(0xFF02AFDD);
 final darkColor = Color(0xFF262626);
@@ -49,7 +49,7 @@ var lightThemeData = new ThemeData(
   primaryColor: primaryColor,
   primaryColorDark: primaryColor,
   primaryColorLight: primaryColor,
-  primarySwatch: primaryMaterialColor,
+  primarySwatch: secondaryMaterialColor,
   secondaryHeaderColor: secondaryColor,
   scaffoldBackgroundColor: Color(0xFFFFFFFF),
   brightness: Brightness.light,
@@ -58,6 +58,12 @@ var lightThemeData = new ThemeData(
   focusColor: primaryColor,
   disabledColor: lightDisableColor,
   indicatorColor: secondaryColor,
+  inputDecorationTheme: InputDecorationTheme(
+    floatingLabelBehavior: FloatingLabelBehavior.always,
+    focusedBorder: UnderlineInputBorder(
+      borderSide: BorderSide(color: secondaryColor),
+    ),
+  ),
   textTheme: TextTheme(
     headline6: TextStyle(
       color: lightTextPrimaryColor,
@@ -128,7 +134,7 @@ var darkThemeData = ThemeData(
   primaryColor: primaryColor,
   primaryColorDark: primaryColor,
   primaryColorLight: primaryColor,
-  primarySwatch: primaryMaterialColor,
+  primarySwatch: secondaryMaterialColor,
   secondaryHeaderColor: secondaryColor,
   scaffoldBackgroundColor: darkColor,
   brightness: Brightness.dark,
