@@ -7,8 +7,8 @@ import 'package:kupol_app/welcome/repositories/auth_repository.dart';
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
 
-  final _loginController = TextEditingController(text: "test");
-  final _passwordController = TextEditingController(text: "test");
+  final _loginController = TextEditingController(text: "testsec");
+  final _passwordController = TextEditingController(text: "testsec");
 
   Future<void> _authorizeUser(
       BuildContext context, String login, String password) async {
