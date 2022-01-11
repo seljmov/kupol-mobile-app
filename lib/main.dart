@@ -1,32 +1,52 @@
 import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:kupol_app/components/change_theme_notifier.dart';
 import 'package:kupol_app/components/employee_model.dart';
 import 'package:kupol_app/components/role.dart';
 import 'package:kupol_app/components/employee_repository.dart';
+import 'package:kupol_app/components/settings_repository.dart';
 import 'package:kupol_app/security/events_screen.dart';
 import 'package:kupol_app/theme.dart';
 import 'package:kupol_app/welcome/login/login_screen.dart';
+import 'package:provider/provider.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  var theme = await SettingsRepository().getThemeMode();
+
   return runApp(
-    EasyDynamicThemeWidget(
-      child: KupolApp(),
+    ChangeNotifierProvider(
+      create: (context) => ChangeThemeNotifier(theme),
+      builder: (context, child) {
+        return EasyDynamicThemeWidget(
+          initialThemeMode: theme,
+          child: KupolApp(
+            themeMode: theme,
+          ),
+        );
+      },
     ),
   );
 }
 
 class KupolApp extends StatelessWidget {
-  const KupolApp({Key? key}) : super(key: key);
+  KupolApp({Key? key, required this.themeMode}) : super(key: key);
+
+  final ThemeMode themeMode;
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: "Kupol App",
-      debugShowCheckedModeBanner: false,
-      theme: lightThemeData,
-      darkTheme: darkThemeData,
-      themeMode: EasyDynamicTheme.of(context).themeMode,
-      home: StartUp(),
+    return Consumer<ChangeThemeNotifier>(
+      builder: (context, notifier, child) {
+        return MaterialApp(
+          title: "Kupol App",
+          debugShowCheckedModeBanner: false,
+          theme: notifier.themeMode == ThemeMode.light
+              ? lightThemeData
+              : darkThemeData,
+          home: StartUp(),
+        );
+      },
     );
   }
 }
