@@ -74,6 +74,7 @@ class EventCard extends StatelessWidget {
                       ),
                     ],
                   ),
+                  SizedBox(height: 6),
                   Text(
                     _getSubtitle(),
                     style: TextStyle(
