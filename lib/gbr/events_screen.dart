@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kupol_app/components/employee_repository.dart';
 import 'package:kupol_app/gbr/add_event_screen.dart';
+import 'package:kupol_app/gbr/event_detail_sreen.dart';
 import 'package:kupol_app/profile/profile_screen.dart';
 import 'package:kupol_app/security/components/event_card.dart';
 import 'package:kupol_app/security/components/event_model.dart';
@@ -10,7 +11,8 @@ import 'package:kupol_app/security/repositories/events_repository.dart';
 class EventsScreenGbr extends StatelessWidget {
   const EventsScreenGbr({Key? key}) : super(key: key);
 
-  List<Widget> _configureEventsList(Map<String, List<Event>> events) {
+  List<Widget> _configureEventsList(
+      BuildContext context, Map<String, List<Event>> events) {
     List<Widget> children = [];
 
     for (var key in events.keys) {
@@ -37,6 +39,16 @@ class EventsScreenGbr extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: EventCard(
                     event: keyEvents[index],
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => EventDetailScreen(
+                            event: keyEvents[index],
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 );
               },
@@ -125,7 +137,7 @@ class EventsScreenGbr extends StatelessWidget {
             child: SingleChildScrollView(
               physics: ClampingScrollPhysics(),
               child: Column(
-                children: _configureEventsList(events),
+                children: _configureEventsList(context, events),
               ),
             ),
           );
