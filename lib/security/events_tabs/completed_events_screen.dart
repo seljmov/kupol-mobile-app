@@ -30,6 +30,8 @@ class CompletedEventsScreen extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: EventCard(
                 event: events[index],
+                showStatus: true,
+                showButtons: true,
               ),
             );
           }),

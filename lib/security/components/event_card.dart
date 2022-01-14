@@ -5,10 +5,18 @@ import 'package:kupol_app/security/components/event_status.dart';
 import 'package:kupol_app/security/components/event_status_card.dart';
 import 'package:kupol_app/security/event_detail_screen.dart';
 
+// TODO: Создать общий EventsScrollList
 class EventCard extends StatelessWidget {
-  EventCard({Key? key, required this.event}) : super(key: key);
+  EventCard({
+    Key? key,
+    required this.event,
+    this.showStatus,
+    this.showButtons,
+  }) : super(key: key);
 
   final Event event;
+  final bool? showStatus;
+  final bool? showButtons;
 
   String _getSubtitle() {
     return event.status == EventStatus.New
@@ -51,7 +59,8 @@ class EventCard extends StatelessWidget {
                         ),
                       ),
                       SizedBox(width: 8),
-                      EventStatusCard(status: event.status),
+                      if (showStatus == true)
+                        EventStatusCard(status: event.status),
                     ],
                   ),
                   SizedBox(height: 8),
@@ -84,7 +93,7 @@ class EventCard extends StatelessWidget {
                   ),
                 ],
               ),
-              if (event.status == EventStatus.New)
+              if (event.status == EventStatus.New && showButtons == true)
                 Padding(
                   padding: const EdgeInsets.only(top: 12),
                   child: ElevatedButton(
