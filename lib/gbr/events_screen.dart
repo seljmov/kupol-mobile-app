@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kupol_app/components/employee_repository.dart';
+import 'package:kupol_app/gbr/add_event_screen.dart';
 import 'package:kupol_app/profile/profile_screen.dart';
 import 'package:kupol_app/security/components/event_card.dart';
 import 'package:kupol_app/security/components/event_model.dart';
@@ -68,7 +69,7 @@ class EventsScreenGbr extends StatelessWidget {
                 ),
               ),
               TextSpan(
-                text: " (10-15 декабря)",
+                text: " (10-16 декабря)",
                 style: TextStyle(
                   fontSize: 18,
                   color: Theme.of(context).textTheme.bodyText1?.color,
@@ -129,6 +130,23 @@ class EventsScreenGbr extends StatelessWidget {
             ),
           );
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => AddEventScreen(),
+            ),
+          );
+        },
+        backgroundColor: Theme.of(context).secondaryHeaderColor,
+        foregroundColor: Colors.white,
+        elevation: 2,
+        child: Icon(
+          Icons.add_rounded,
+          size: 40,
+        ),
       ),
     );
   }

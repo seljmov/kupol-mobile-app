@@ -9,6 +9,9 @@ final kEventOnVerificationStatusColor = Color(0xFFE94235);
 final kEventNewAtWorkColor = Color(0xFF0075B0);
 final kEventCompletedStatusColor = Color(0xFF4F4E4E);
 
+final catchFocus =
+    (context) => FocusScope.of(context).requestFocus(FocusNode());
+
 String getRoleName(Role role) {
   if (role == Role.security) return "Сотрудник охраны";
   if (role == Role.gbr) return "Сотрудник ГБР";
