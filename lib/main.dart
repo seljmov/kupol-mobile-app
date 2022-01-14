@@ -5,6 +5,7 @@ import 'package:kupol_app/components/employee_model.dart';
 import 'package:kupol_app/components/role.dart';
 import 'package:kupol_app/components/employee_repository.dart';
 import 'package:kupol_app/components/settings_repository.dart';
+import 'package:kupol_app/gbr/events_screen.dart';
 import 'package:kupol_app/security/events_screen.dart';
 import 'package:kupol_app/theme.dart';
 import 'package:kupol_app/welcome/login/login_screen.dart';
@@ -62,7 +63,7 @@ class StartUp extends StatelessWidget {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(
             body: Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator.adaptive(),
             ),
           );
         }
@@ -71,6 +72,7 @@ class StartUp extends StatelessWidget {
         if (employee == null) return LoginScreen();
 
         if (employee.role == Role.security) return EventsScreen();
+        if (employee.role == Role.gbr) return EventsScreenGbr();
 
         return Scaffold(
           body: Center(
