@@ -7,6 +7,7 @@ import 'package:kupol_app/components/employee_repository.dart';
 import 'package:kupol_app/components/settings_repository.dart';
 import 'package:kupol_app/gbr/events_screen.dart';
 import 'package:kupol_app/security/events_screen.dart';
+import 'package:kupol_app/technician/technician_screen.dart';
 import 'package:kupol_app/theme.dart';
 import 'package:kupol_app/welcome/login/login_screen.dart';
 import 'package:provider/provider.dart';
@@ -57,6 +58,7 @@ class StartUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    /// TODO: Переписать авторизацию
     return FutureBuilder<Employee?>(
       future: EmployeeRepository().getEmployeeInfo(),
       builder: (context, snapshot) {
@@ -73,6 +75,7 @@ class StartUp extends StatelessWidget {
 
         if (employee.role == Role.security) return EventsScreen();
         if (employee.role == Role.gbr) return EventsScreenGbr();
+        if (employee.role == Role.technician) return TechnicianScreen();
 
         return Scaffold(
           body: Center(
