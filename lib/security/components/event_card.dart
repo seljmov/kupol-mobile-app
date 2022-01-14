@@ -10,11 +10,13 @@ class EventCard extends StatelessWidget {
   EventCard({
     Key? key,
     required this.event,
+    required this.onTap,
     this.showStatus,
     this.showButtons,
   }) : super(key: key);
 
   final Event event;
+  final void Function() onTap;
   final bool? showStatus;
   final bool? showButtons;
 
@@ -27,14 +29,7 @@ class EventCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => EventDetailScreen(event: event),
-          ),
-        );
-      },
+      onTap: onTap,
       child: Card(
         child: Padding(
           padding: const EdgeInsets.symmetric(

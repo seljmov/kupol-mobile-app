@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kupol_app/security/components/event_card.dart';
 import 'package:kupol_app/security/components/event_model.dart';
+import 'package:kupol_app/security/event_detail_screen.dart';
 import 'package:kupol_app/security/repositories/events_repository.dart';
 
 class WorkEventsScreen extends StatelessWidget {
@@ -32,6 +33,16 @@ class WorkEventsScreen extends StatelessWidget {
                 event: events[index],
                 showStatus: true,
                 showButtons: true,
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => EventDetailScreen(
+                        event: events[index],
+                      ),
+                    ),
+                  );
+                },
               ),
             );
           }),
