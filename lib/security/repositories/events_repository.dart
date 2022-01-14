@@ -2,7 +2,6 @@ import 'dart:collection';
 import 'dart:core';
 import 'package:kupol_app/security/components/event_model.dart';
 import 'package:kupol_app/security/components/event_status.dart';
-import 'package:collection/collection.dart';
 
 class EventsRepository {
   List<Event> _events = [
@@ -118,7 +117,6 @@ class EventsRepository {
       var day = date.split(".")[0];
       var month = int.parse(date.split(".")[1]);
       var dateKey = "$day ${monthByNumber[month - 1]}";
-      print(dateKey);
       if (events.containsKey(dateKey)) {
         events[dateKey]?.add(event);
       } else {
