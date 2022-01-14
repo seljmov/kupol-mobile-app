@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kupol_app/components/employee_repository.dart';
 import 'package:kupol_app/gbr/add_event_screen.dart';
+import 'package:kupol_app/gbr/empty_events_screen.dart';
 import 'package:kupol_app/gbr/event_detail_sreen.dart';
 import 'package:kupol_app/profile/profile_screen.dart';
 import 'package:kupol_app/security/components/event_card.dart';
@@ -61,7 +62,9 @@ class EventsScreenGbr extends StatelessWidget {
       children.add(widget);
     }
 
-    return children.reversed.toList();
+    return children.isEmpty
+        ? [EmptyEventsScreen()]
+        : children.reversed.toList();
   }
 
   @override
