@@ -3,6 +3,7 @@ import 'package:kupol_app/technician/requests/components/request_card.dart';
 import 'package:kupol_app/technician/requests/empty_requests_screen.dart';
 import 'package:kupol_app/technician/requests/components/request_model.dart';
 import 'package:kupol_app/technician/repositories/technician_repository.dart';
+import 'package:kupol_app/technician/requests/request_detail_screen.dart';
 
 class RequestsScreen extends StatelessWidget {
   RequestsScreen({Key? key}) : super(key: key);
@@ -35,8 +36,19 @@ class RequestsScreen extends StatelessWidget {
                   vertical: 4,
                   horizontal: 8,
                 ),
-                child: RequestCard(
-                  request: requests[index],
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => RequestDetailScreen(
+                          request: requests[index],
+                        ),
+                      ),
+                    );
+                  },
+                  child: RequestCard(
+                    request: requests[index],
+                  ),
                 ),
               );
             }),
