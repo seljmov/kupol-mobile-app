@@ -9,57 +9,56 @@ class EntityCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      child: Card(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: 20,
-            horizontal: 16,
-          ),
-          child: Column(
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Text(
-                          "#${entity.id}",
-                          overflow: TextOverflow.ellipsis,
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Theme.of(context).textTheme.bodyText1?.color,
-                            fontWeight: FontWeight.w600,
-                          ),
+    // TODO: Рефакторинг переходов по карточке
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(
+          vertical: 20,
+          horizontal: 16,
+        ),
+        child: Column(
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        "#${entity.id}",
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Theme.of(context).textTheme.bodyText1?.color,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
-                      SvgPicture.asset(
-                        "lib/assets/icons/right_arrow.svg",
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 6),
-                  Text(
-                    entity.company,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Theme.of(context).textTheme.bodyText1?.color,
                     ),
-                  ),
-                  SizedBox(height: 6),
-                  Text(
-                    entity.address,
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: Theme.of(context).textTheme.bodyText2?.color,
+                    SvgPicture.asset(
+                      "lib/assets/icons/right_arrow.svg",
                     ),
+                  ],
+                ),
+                SizedBox(height: 6),
+                Text(
+                  entity.company,
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Theme.of(context).textTheme.bodyText1?.color,
                   ),
-                ],
-              ),
-            ],
-          ),
+                ),
+                SizedBox(height: 6),
+                Text(
+                  entity.address,
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: Theme.of(context).textTheme.bodyText2?.color,
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );

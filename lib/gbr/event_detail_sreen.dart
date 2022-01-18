@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kupol_app/components/full_screen_view.dart';
 import 'package:kupol_app/security/components/event_model.dart';
-import 'package:kupol_app/security/components/event_status_card.dart';
 import 'package:kupol_app/security/components/event_technical_details_card.dart';
 
 class EventDetailScreen extends StatelessWidget {
