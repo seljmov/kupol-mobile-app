@@ -1,5 +1,3 @@
-import 'package:kupol_app/components/role.dart';
-
 class User {
   final int id;
   final String lastname;
@@ -7,7 +5,7 @@ class User {
   final String patronymic;
   final String phone;
   final String address;
-  final Role role;
+  final String role;
   final String pin;
 
   User({
@@ -20,6 +18,14 @@ class User {
     required this.role,
     required this.pin,
   });
+
+  String getName() {
+    return "$lastname ${firstname[0]}.${patronymic[0]}.";
+  }
+
+  String getFullname() {
+    return "$lastname $firstname $patronymic";
+  }
 
   factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"],

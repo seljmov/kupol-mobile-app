@@ -11,7 +11,7 @@ class EventTechnicalDetailsCard extends StatelessWidget {
   String getExecutorRoleName(String executorName) {
     var user = EmployeeService().getEmployeeByFullname(executorName);
 
-    return getRoleName(user.role);
+    return user.role;
   }
 
   @override

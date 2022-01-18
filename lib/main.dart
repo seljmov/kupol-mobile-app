@@ -2,9 +2,9 @@ import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:kupol_app/components/change_theme_notifier.dart';
 import 'package:kupol_app/components/employee_model.dart';
-import 'package:kupol_app/components/role.dart';
 import 'package:kupol_app/components/employee_repository.dart';
 import 'package:kupol_app/components/settings_repository.dart';
+import 'package:kupol_app/components/user_role.dart';
 import 'package:kupol_app/gbr/events_screen.dart';
 import 'package:kupol_app/security/events_screen.dart';
 import 'package:kupol_app/technician/technician_screen.dart';
@@ -73,9 +73,9 @@ class StartUp extends StatelessWidget {
         var employee = snapshot.data;
         if (employee == null) return LoginScreen();
 
-        if (employee.role == Role.security) return EventsScreen();
-        if (employee.role == Role.gbr) return EventsScreenGbr();
-        if (employee.role == Role.technician) return TechnicianScreen();
+        if (employee.role == UserRole.Security) return EventsScreen();
+        if (employee.role == UserRole.Gbr) return EventsScreenGbr();
+        if (employee.role == UserRole.Technician) return TechnicianScreen();
 
         return Scaffold(
           body: Center(

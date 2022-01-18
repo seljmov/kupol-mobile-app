@@ -1,7 +1,7 @@
-import 'package:kupol_app/components/role.dart';
-import 'package:kupol_app/components/user_model.dart';
+import 'package:kupol_app/components/user_role.dart';
+import 'package:kupol_app/technician/entity/entity_form/users/components/user_model.dart';
 
-class UserService {
+class EntityFormRepository {
   List<User> _users = [
     User(
       id: 0,
@@ -10,7 +10,7 @@ class UserService {
       patronymic: "Андреевич",
       phone: "79255669071",
       address: "Морская ул., 123/5, Москва",
-      role: Role.security,
+      role: UserRole.Security,
       pin: "5567",
     ),
     User(
@@ -20,7 +20,7 @@ class UserService {
       patronymic: "Михайлович",
       phone: "79255669071",
       address: "Большая сенная ул., 24 стр. 1, Москва",
-      role: Role.security,
+      role: UserRole.Security,
       pin: "9876",
     ),
     User(
@@ -30,12 +30,12 @@ class UserService {
       patronymic: "Валерьевна",
       phone: "79255669071",
       address: "Морская ул., 123/5, Москва",
-      role: Role.security,
+      role: UserRole.Security,
       pin: "1234",
     ),
   ];
 
-  Future<User> getUserInfoById(int id) async {
-    return _users.firstWhere((user) => user.id == id);
+  Future<List<User>> getUsers() async {
+    return _users;
   }
 }

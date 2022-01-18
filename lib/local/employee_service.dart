@@ -1,6 +1,6 @@
-import 'package:kupol_app/components/role.dart';
 import 'package:kupol_app/components/employee_model.dart';
 import 'package:collection/collection.dart';
+import 'package:kupol_app/components/user_role.dart';
 
 class EmployeeService {
   List<Employee> _employees = [
@@ -11,7 +11,7 @@ class EmployeeService {
       patronymic: "Мурадович",
       phone: "79887893991",
       address: "Морская ул., 123/5, Москва",
-      role: Role.security,
+      role: UserRole.Security,
       pin: "1234",
       login: "testsec",
       password: "testsec",
@@ -23,7 +23,7 @@ class EmployeeService {
       patronymic: "Максимович",
       phone: "79887887415",
       address: "Морская ул., 123/5, Москва",
-      role: Role.gbr,
+      role: UserRole.Gbr,
       pin: "1234",
       login: "testgbr",
       password: "testgbr",
@@ -35,7 +35,7 @@ class EmployeeService {
       patronymic: "Иванович",
       phone: "79887874521",
       address: "Морская ул., 123/5, Москва",
-      role: Role.technician,
+      role: UserRole.Technician,
       pin: "1235",
       login: "testtech",
       password: "testtech",

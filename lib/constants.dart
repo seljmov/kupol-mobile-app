@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kupol_app/components/role.dart';
 
 /// value -> "error:"
 final errorPattern = "error:";
@@ -17,11 +16,3 @@ const kDetailScreenPadding = const EdgeInsets.symmetric(
 
 final catchFocus =
     (context) => FocusScope.of(context).requestFocus(FocusNode());
-
-String getRoleName(Role role) {
-  if (role == Role.security) return "Сотрудник охраны";
-  if (role == Role.gbr) return "Сотрудник ГБР";
-  if (role == Role.technician) return "Техник";
-
-  return "";
-}
