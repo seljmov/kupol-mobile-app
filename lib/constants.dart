@@ -9,6 +9,12 @@ final kEventOnVerificationStatusColor = Color(0xFFE94235);
 final kEventNewAtWorkColor = Color(0xFF0075B0);
 final kEventCompletedStatusColor = Color(0xFF4F4E4E);
 
+/// symmetric(vertical: 10, horizontal: 24)
+const kDetailScreenPadding = const EdgeInsets.symmetric(
+  vertical: 10,
+  horizontal: 24,
+);
+
 final catchFocus =
     (context) => FocusScope.of(context).requestFocus(FocusNode());
 

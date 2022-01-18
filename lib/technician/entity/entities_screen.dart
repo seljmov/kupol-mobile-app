@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kupol_app/technician/entity/components/entity_card.dart';
 import 'package:kupol_app/technician/entity/empty_entities_screen.dart';
 import 'package:kupol_app/technician/entity/components/entity_model.dart';
+import 'package:kupol_app/technician/entity/entity_details_screen.dart';
 import 'package:kupol_app/technician/repositories/technician_repository.dart';
 
 class EntitiesScreen extends StatelessWidget {
@@ -35,8 +36,20 @@ class EntitiesScreen extends StatelessWidget {
                   vertical: 4,
                   horizontal: 8,
                 ),
-                child: EntityCard(
-                  entity: entities[index],
+                child: GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EntityDetailsScreen(
+                          entity: entities[index],
+                        ),
+                      ),
+                    );
+                  },
+                  child: EntityCard(
+                    entity: entities[index],
+                  ),
                 ),
               );
             }),

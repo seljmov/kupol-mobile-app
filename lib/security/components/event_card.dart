@@ -3,7 +3,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kupol_app/security/components/event_model.dart';
 import 'package:kupol_app/security/components/event_status.dart';
 import 'package:kupol_app/security/components/event_status_card.dart';
-import 'package:kupol_app/security/event_detail_screen.dart';
 
 // TODO: Создать общий EventsScrollList
 class EventCard extends StatelessWidget {
