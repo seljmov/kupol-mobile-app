@@ -5,6 +5,7 @@ import 'package:kupol_app/components/image_selector.dart';
 import 'package:kupol_app/constants.dart';
 import 'package:kupol_app/technician/entity/components/editable_image_model.dart';
 import 'package:kupol_app/technician/entity/components/entity_model.dart';
+import 'package:kupol_app/technician/entity/entity_form/entity_form_sreen.dart';
 import 'package:kupol_app/theme.dart';
 
 class EntityDetailsScreen extends StatelessWidget {
@@ -507,7 +508,16 @@ class EntityDetailsScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   child: GestureDetector(
-                    onTap: isEditable ? null : () {},
+                    onTap: isEditable
+                        ? null
+                        : () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => EntityFormScreen(),
+                              ),
+                            );
+                          },
                     child: Card(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(

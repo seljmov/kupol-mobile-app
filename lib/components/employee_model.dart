@@ -1,5 +1,3 @@
-import 'package:kupol_app/components/role.dart';
-
 class Employee {
   final int id;
   final String lastname;
@@ -7,7 +5,7 @@ class Employee {
   final String patronymic;
   final String phone;
   final String address;
-  final Role role;
+  final String role;
   final String pin;
   final String login;
   final String password;
@@ -40,7 +38,7 @@ class Employee {
         patronymic: json["patronymic"],
         phone: json["phone_number"],
         address: json["address"],
-        role: Role.values.firstWhere((e) => e.toString() == json["role"]),
+        role: json["role"],
         pin: json["pin"],
         login: json["login"],
         password: json["password"],
@@ -53,7 +51,7 @@ class Employee {
         "patronymic": patronymic,
         "phone_number": phone,
         "address": address,
-        "role": role.toString(),
+        "role": role,
         "pin": pin,
         "login": login,
         "password": password,

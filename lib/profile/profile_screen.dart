@@ -226,7 +226,7 @@ class ProfileScreen extends StatelessWidget {
                                 ),
                                 SizedBox(height: 4),
                                 Text(
-                                  getRoleName(employee.role),
+                                  employee.role,
                                   style: TextStyle(
                                     fontSize: 14,
                                   ),
