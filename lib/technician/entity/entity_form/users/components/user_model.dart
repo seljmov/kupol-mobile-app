@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class User {
   final int id;
   final String lastname;
@@ -27,6 +29,8 @@ class User {
     return "$lastname $firstname $patronymic";
   }
 
+  factory User.fromRawJson(String str) => User.fromJson(json.decode(str));
+
   factory User.fromJson(Map<String, dynamic> json) => User(
         id: json["id"],
         lastname: json["lastname"],
@@ -37,6 +41,8 @@ class User {
         role: json["role"],
         pin: json["pin"],
       );
+
+  String toRawJson() => json.encode(toJson());
 
   Map<String, dynamic> toJson() => {
         "id": id,

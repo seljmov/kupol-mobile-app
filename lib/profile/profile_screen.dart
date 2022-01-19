@@ -8,7 +8,6 @@ import 'package:kupol_app/components/employee_repository.dart';
 import 'package:kupol_app/components/full_screen_view.dart';
 import 'package:kupol_app/components/image_selector.dart';
 import 'package:kupol_app/components/settings_repository.dart';
-import 'package:kupol_app/constants.dart';
 import 'package:kupol_app/profile/components/default_profile_avatar.dart';
 import 'package:kupol_app/profile/components/edit_avatar_button.dart';
 import 'package:kupol_app/theme.dart';
