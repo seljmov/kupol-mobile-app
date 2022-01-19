@@ -7,6 +7,7 @@ class SettingsRepository {
   /// Сохранить тему
   Future<void> saveThemeMode(ThemeMode mode) async {
     final storage = FlutterSecureStorage();
+    await storage.delete(key: _themeModeKey);
     await storage.write(key: _themeModeKey, value: mode.toString());
   }
 
