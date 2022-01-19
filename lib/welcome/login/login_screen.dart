@@ -53,6 +53,7 @@ class LoginScreen extends StatelessWidget {
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
+        // TODO: Изменить переход
         builder: (context) => EventsScreen(),
       ),
     );

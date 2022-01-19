@@ -6,6 +6,7 @@ import 'package:kupol_app/components/employee_repository.dart';
 import 'package:kupol_app/components/settings_repository.dart';
 import 'package:kupol_app/components/user_role.dart';
 import 'package:kupol_app/gbr/events_screen.dart';
+import 'package:kupol_app/sandbox_screen.dart';
 import 'package:kupol_app/security/events_screen.dart';
 import 'package:kupol_app/technician/technician_screen.dart';
 import 'package:kupol_app/theme.dart';
@@ -69,6 +70,8 @@ class StartUp extends StatelessWidget {
             ),
           );
         }
+
+        //return SandboxScreen();
 
         var employee = snapshot.data;
         if (employee == null) return LoginScreen();
