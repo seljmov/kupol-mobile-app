@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kupol_app/technician/entity/entity_form/repositories/entity_form_repository.dart';
 import 'package:kupol_app/technician/entity/entity_form/users/components/user_model.dart';
+import 'package:kupol_app/technician/entity/entity_form/users/create_user_bottom_sheet.dart';
 import 'package:kupol_app/theme.dart';
 
 class UsersScreen extends StatelessWidget {
@@ -17,53 +18,59 @@ class UsersScreen extends StatelessWidget {
           topRight: Radius.circular(20),
         ),
       ),
-      builder: (BuildContext context) => Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(height: 12),
-          Center(
-            child: SvgPicture.asset(
-              "lib/assets/icons/drop_down.svg",
+      builder: (BuildContext context) => SingleChildScrollView(
+        physics: ClampingScrollPhysics(),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(height: 12),
+            Center(
+              child: SvgPicture.asset(
+                "lib/assets/icons/drop_down.svg",
+              ),
             ),
-          ),
-          SizedBox(height: 32),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 22),
-            child: Column(
-              children: [
-                ListTile(
-                  dense: true,
-                  contentPadding: EdgeInsets.zero,
-                  visualDensity: VisualDensity(horizontal: 0, vertical: -2),
-                  title: Text(
-                    "Редактировать",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
+            SizedBox(height: 32),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 22),
+              child: Column(
+                children: [
+                  ListTile(
+                    dense: true,
+                    contentPadding: EdgeInsets.zero,
+                    visualDensity: VisualDensity(horizontal: 0, vertical: -2),
+                    title: Text(
+                      "Редактировать",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
+                    onTap: () async {
+                      Navigator.pop(context);
+                      await showCreateUserBottomSheet(context);
+                    },
                   ),
-                  onTap: () {},
-                ),
-                Divider(),
-                ListTile(
-                  dense: true,
-                  contentPadding: EdgeInsets.zero,
-                  visualDensity: VisualDensity(horizontal: 0, vertical: -2),
-                  title: Text(
-                    "Удалить",
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
+                  Divider(),
+                  ListTile(
+                    dense: true,
+                    contentPadding: EdgeInsets.zero,
+                    visualDensity: VisualDensity(horizontal: 0, vertical: -2),
+                    title: Text(
+                      "Удалить",
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
+                    onTap: () {},
                   ),
-                  onTap: () {},
-                ),
-              ],
+                ],
+              ),
             ),
-          ),
-          SizedBox(height: 64),
-        ],
+            SizedBox(height: 64),
+          ],
+        ),
       ),
     );
   }
@@ -210,7 +217,8 @@ class UsersScreen extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () async {
-                            _showMoreBottomSheet(context);
+                            await _showMoreBottomSheet(context);
+                            //await showCreateUserBottomSheet(context);
                           },
                           child: SvgPicture.asset("lib/assets/icons/more.svg"),
                         ),
