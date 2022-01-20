@@ -34,6 +34,7 @@ final hintColor = Color(0xFFC0C0C0);
 final underlineInputBorderPrimary = UnderlineInputBorder(
   borderSide: BorderSide(color: primaryColor),
 );
+final secondaryGreyColor = Color(0xFFE5E5E5);
 
 final lightDisableColor = Color(0xFFF5F5F5);
 final lightTextPrimaryColor = darkColor;
@@ -102,7 +103,7 @@ var lightThemeData = new ThemeData(
     elevation: 0,
     shape: RoundedRectangleBorder(
       side: BorderSide(
-        color: Color(0xFFE5E5E5),
+        color: secondaryGreyColor,
         width: 1.0,
       ),
       borderRadius: BorderRadius.circular(14.0),
