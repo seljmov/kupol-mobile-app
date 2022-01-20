@@ -14,5 +14,9 @@ const kDetailScreenPadding = const EdgeInsets.symmetric(
   horizontal: 24,
 );
 
+/// SizedBox(height: 48)
+const kBottomSizedBox = SizedBox(height: 48);
+
+/// (context) => FocusScope.of(context).requestFocus(FocusNode());
 final catchFocus =
     (context) => FocusScope.of(context).requestFocus(FocusNode());

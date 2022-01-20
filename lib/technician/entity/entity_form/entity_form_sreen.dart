@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kupol_app/technician/entity/entity_form/plumes/plumes_screen.dart';
+import 'package:kupol_app/technician/entity/entity_form/sections/create_section_bottom_sheet.dart';
 import 'package:kupol_app/technician/entity/entity_form/sections/sections_screen.dart';
 import 'package:kupol_app/technician/entity/entity_form/users/create_user_bottom_sheet.dart';
 import 'package:kupol_app/technician/entity/entity_form/users/users_screen.dart';
@@ -18,10 +19,11 @@ class EntityFormScreen extends StatelessWidget {
   Future<void> _getCreateFunction(BuildContext context) async {
     var index = _activeTabNotifier.value;
     if (index == PageIndex.UsersPage) {
-      print("page is PageIndex.UsersPage");
       await showCreateUserBottomSheet(context: context);
     }
-    // if (index == PageIndex.SectionsPage) return () {};
+    if (index == PageIndex.SectionsPage) {
+      await showCreateSectionBottomSheet(context: context);
+    }
     // if (index == PageIndex.PlumsPage) return () {};
 
     return null;
