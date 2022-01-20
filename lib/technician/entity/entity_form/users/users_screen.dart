@@ -9,7 +9,10 @@ import 'package:kupol_app/theme.dart';
 class UsersScreen extends StatelessWidget {
   const UsersScreen({Key? key}) : super(key: key);
 
-  Future<void> _showMoreBottomSheet(BuildContext context) async {
+  Future<void> _showMoreBottomSheet({
+    required BuildContext context,
+    required User user,
+  }) async {
     await showModalBottomSheet(
       context: context,
       shape: RoundedRectangleBorder(
@@ -48,7 +51,10 @@ class UsersScreen extends StatelessWidget {
                     ),
                     onTap: () async {
                       Navigator.pop(context);
-                      await showCreateUserBottomSheet(context);
+                      await showEditUserBottomSheet(
+                        context: context,
+                        user: user,
+                      );
                     },
                   ),
                   Divider(),
@@ -217,7 +223,10 @@ class UsersScreen extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () async {
-                            await _showMoreBottomSheet(context);
+                            await _showMoreBottomSheet(
+                              context: context,
+                              user: users[index],
+                            );
                             //await showCreateUserBottomSheet(context);
                           },
                           child: SvgPicture.asset("lib/assets/icons/more.svg"),
