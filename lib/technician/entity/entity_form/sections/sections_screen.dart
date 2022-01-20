@@ -2,11 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kupol_app/technician/entity/entity_form/repositories/entity_form_repository.dart';
 import 'package:kupol_app/technician/entity/entity_form/sections/components/section_model.dart';
+import 'package:kupol_app/technician/entity/entity_form/sections/edit_section_bottom_sheet.dart';
 
 class SectionsScreen extends StatelessWidget {
   const SectionsScreen({Key? key}) : super(key: key);
 
-  Future<void> _showMoreBottomSheet(BuildContext context) async {
+  Future<void> _showMoreBottomSheet({
+    required BuildContext context,
+    required Section section,
+  }) async {
     await showModalBottomSheet(
       context: context,
       shape: RoundedRectangleBorder(
@@ -41,7 +45,13 @@ class SectionsScreen extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  onTap: () {},
+                  onTap: () async {
+                    Navigator.pop(context);
+                    await showEditSectionBottomSheet(
+                      context: context,
+                      section: section,
+                    );
+                  },
                 ),
                 Divider(),
                 ListTile(
@@ -55,7 +65,7 @@ class SectionsScreen extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  onTap: () {},
+                  onTap: () => Navigator.of(context).pop(),
                 ),
               ],
             ),
@@ -175,7 +185,10 @@ class SectionsScreen extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () async {
-                            _showMoreBottomSheet(context);
+                            _showMoreBottomSheet(
+                              context: context,
+                              section: sections[index],
+                            );
                           },
                           child: SvgPicture.asset("lib/assets/icons/more.svg"),
                         ),
