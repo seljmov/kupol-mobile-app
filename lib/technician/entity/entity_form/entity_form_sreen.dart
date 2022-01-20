@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kupol_app/technician/entity/entity_form/plumes/create_plume_bottom_sheet.dart';
 import 'package:kupol_app/technician/entity/entity_form/plumes/plumes_screen.dart';
 import 'package:kupol_app/technician/entity/entity_form/sections/create_section_bottom_sheet.dart';
 import 'package:kupol_app/technician/entity/entity_form/sections/sections_screen.dart';
@@ -24,7 +25,9 @@ class EntityFormScreen extends StatelessWidget {
     if (index == PageIndex.SectionsPage) {
       await showCreateSectionBottomSheet(context: context);
     }
-    // if (index == PageIndex.PlumsPage) return () {};
+    if (index == PageIndex.PlumsPage) {
+      await showCreatePlumeBottomSheet(context: context);
+    }
 
     return null;
   }

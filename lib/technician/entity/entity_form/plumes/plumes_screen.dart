@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kupol_app/technician/entity/entity_form/plumes/components/plume_model.dart';
+import 'package:kupol_app/technician/entity/entity_form/plumes/edit_plume_bottom_sheet.dart';
 import 'package:kupol_app/technician/entity/entity_form/repositories/entity_form_repository.dart';
 
 class PlumesScreen extends StatelessWidget {
   const PlumesScreen({Key? key}) : super(key: key);
 
-  Future<void> _showMoreBottomSheet(BuildContext context) async {
+  Future<void> _showMoreBottomSheet({
+    required BuildContext context,
+    required Plume plume,
+  }) async {
     await showModalBottomSheet(
       context: context,
       shape: RoundedRectangleBorder(
@@ -41,7 +45,13 @@ class PlumesScreen extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  onTap: () {},
+                  onTap: () async {
+                    Navigator.pop(context);
+                    await showEditPlumeBottomSheet(
+                      context: context,
+                      plume: plume,
+                    );
+                  },
                 ),
                 Divider(),
                 ListTile(
@@ -55,7 +65,7 @@ class PlumesScreen extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-                  onTap: () {},
+                  onTap: () => Navigator.of(context).pop(),
                 ),
               ],
             ),
@@ -175,7 +185,10 @@ class PlumesScreen extends StatelessWidget {
                         ),
                         GestureDetector(
                           onTap: () async {
-                            _showMoreBottomSheet(context);
+                            _showMoreBottomSheet(
+                              context: context,
+                              plume: plumes[index],
+                            );
                           },
                           child: SvgPicture.asset("lib/assets/icons/more.svg"),
                         ),
