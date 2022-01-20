@@ -2,20 +2,23 @@ import 'package:extended_masked_text/extended_masked_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kupol_app/constants.dart';
+import 'package:kupol_app/technician/entity/entity_form/users/components/user_model.dart';
 import 'package:kupol_app/theme.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-Future<void> showCreateUserBottomSheet({
+Future<void> showEditUserBottomSheet({
   required BuildContext context,
+  required User user,
 }) async {
-  var lastnameController = TextEditingController();
-  var firstnameController = TextEditingController();
-  var patronymicController = TextEditingController();
+  var lastnameController = TextEditingController(text: user.lastname);
+  var firstnameController = TextEditingController(text: user.firstname);
+  var patronymicController = TextEditingController(text: user.patronymic);
   var phoneController = MaskedTextController(
+    text: user.phone,
     mask: '0 (000) 000-00-00',
   );
-  var addressController = TextEditingController();
-  var pinController = TextEditingController();
+  var addressController = TextEditingController(text: user.address);
+  var pinController = TextEditingController(text: user.pin);
   await showModalBottomSheet(
     context: context,
     isScrollControlled: true,
@@ -47,7 +50,7 @@ Future<void> showCreateUserBottomSheet({
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Text(
-                    "Добавить пользователя".toUpperCase(),
+                    "Редактировать пользователя".toUpperCase(),
                     style: TextStyle(
                       fontSize: 16,
                       color: Theme.of(context).textTheme.bodyText2?.color,

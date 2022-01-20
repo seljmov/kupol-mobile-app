@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kupol_app/technician/entity/entity_form/repositories/entity_form_repository.dart';
 import 'package:kupol_app/technician/entity/entity_form/users/components/user_model.dart';
 import 'package:kupol_app/technician/entity/entity_form/users/create_user_bottom_sheet.dart';
+import 'package:kupol_app/technician/entity/entity_form/users/edit_user_bottom_sheet.dart';
 import 'package:kupol_app/theme.dart';
 
 class UsersScreen extends StatelessWidget {
@@ -69,12 +70,12 @@ class UsersScreen extends StatelessWidget {
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    onTap: () {},
+                    onTap: () => Navigator.of(context).pop(),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 64),
+            SizedBox(height: 48),
           ],
         ),
       ),
