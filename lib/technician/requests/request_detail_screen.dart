@@ -28,41 +28,54 @@ class RequestDetailScreen extends StatelessWidget {
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              "Заявка #${request.id}",
-              style: TextStyle(
-                fontSize: 22,
-                color: Theme.of(context).textTheme.bodyText1?.color,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            SizedBox(height: 16),
-            Row(
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                SvgPicture.asset(
-                  "lib/assets/icons/clock.svg",
-                ),
-                SizedBox(width: 8),
                 Text(
-                  request.date,
+                  "Заявка #${request.id}",
                   style: TextStyle(
+                    fontSize: 22,
                     color: Theme.of(context).textTheme.bodyText1?.color,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
-                SizedBox(width: 8),
+                SizedBox(height: 16),
+                Row(
+                  children: [
+                    SvgPicture.asset(
+                      "lib/assets/icons/clock.svg",
+                    ),
+                    SizedBox(width: 8),
+                    Text(
+                      request.date,
+                      style: TextStyle(
+                        color: Theme.of(context).textTheme.bodyText1?.color,
+                      ),
+                    ),
+                    SizedBox(width: 8),
+                  ],
+                ),
+                SizedBox(height: 16),
+                RequestTechnicalDetailsCard(request: request),
+                SizedBox(height: 16),
+                Text(
+                  request.description,
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: Theme.of(context).textTheme.bodyText1?.color,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
               ],
             ),
-            SizedBox(height: 16),
-            RequestTechnicalDetailsCard(request: request),
-            SizedBox(height: 16),
-            Text(
-              request.description,
-              style: TextStyle(
-                fontSize: 16,
-                color: Theme.of(context).textTheme.bodyText1?.color,
-                fontWeight: FontWeight.w600,
+            Padding(
+              padding: const EdgeInsets.only(bottom: 16),
+              child: ElevatedButton(
+                onPressed: () {},
+                child: Text("Обработать"),
               ),
             ),
           ],
