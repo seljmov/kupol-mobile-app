@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kupol_app/technician/entity/entity_form/plumes/plumes_screen.dart';
 import 'package:kupol_app/technician/entity/entity_form/sections/sections_screen.dart';
+import 'package:kupol_app/technician/entity/entity_form/users/create_user_bottom_sheet.dart';
 import 'package:kupol_app/technician/entity/entity_form/users/users_screen.dart';
 
 class PageIndex {
@@ -14,11 +15,14 @@ class EntityFormScreen extends StatelessWidget {
 
   final _activeTabNotifier = ValueNotifier<int>(0);
 
-  void Function()? _getCreateFunction() {
+  Future<void> _getCreateFunction(BuildContext context) async {
     var index = _activeTabNotifier.value;
-    if (index == PageIndex.UsersPage) return () {};
-    if (index == PageIndex.SectionsPage) return () {};
-    if (index == PageIndex.PlumsPage) return () {};
+    if (index == PageIndex.UsersPage) {
+      print("page is PageIndex.UsersPage");
+      await showCreateUserBottomSheet(context: context);
+    }
+    // if (index == PageIndex.SectionsPage) return () {};
+    // if (index == PageIndex.PlumsPage) return () {};
 
     return null;
   }
@@ -65,7 +69,7 @@ class EntityFormScreen extends StatelessWidget {
           valueListenable: _activeTabNotifier,
           builder: (context, value, child) {
             return FloatingActionButton(
-              onPressed: _getCreateFunction(),
+              onPressed: () async => await _getCreateFunction(context),
               backgroundColor: Theme.of(context).secondaryHeaderColor,
               foregroundColor: Colors.white,
               elevation: 2,
