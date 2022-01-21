@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:kupol_app/local/employee_service.dart';
 import 'package:kupol_app/shared/repositories/employee_repository.dart';
@@ -20,6 +22,12 @@ class AuthRepository {
     return contains && str != null;
   }
 
+  Future<void> saveToken(String token) async {
+    final storage = FlutterSecureStorage();
+    await storage.delete(key: _tokenKey);
+    await storage.write(key: _tokenKey, value: token);
+  }
+
   Future<String> authorizeEmployee(String login, String password) async {
     var user = await EmployeeService().getEmployeeByLogin(login);
 
@@ -31,7 +39,23 @@ class AuthRepository {
       return "error:Пароль введен неверно!";
     }
 
+    var token = _getRandomString(32);
+    await saveToken(token);
     await EmployeeRepository().saveEmployeeInfo(user.toJson());
-    return "ok";
+    return "OK";
+  }
+
+  String _getRandomString(int length) {
+    const _chars =
+        'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz1234567890';
+    var _rnd = Random();
+    return String.fromCharCodes(
+      Iterable.generate(
+        length,
+        (_) => _chars.codeUnitAt(
+          _rnd.nextInt(_chars.length),
+        ),
+      ),
+    );
   }
 }
