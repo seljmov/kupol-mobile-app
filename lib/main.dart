@@ -4,12 +4,13 @@ import 'package:kupol_app/components/change_theme_notifier.dart';
 import 'package:kupol_app/components/employee_model.dart';
 import 'package:kupol_app/components/employee_repository.dart';
 import 'package:kupol_app/components/settings_repository.dart';
-import 'package:kupol_app/components/user_role.dart';
+import 'package:kupol_app/shared/models/user_role.dart';
 import 'package:kupol_app/gbr/gbr_screen.dart';
 import 'package:kupol_app/security/security_screen.dart';
 import 'package:kupol_app/technician/technician_screen.dart';
 import 'package:kupol_app/theme.dart';
 import 'package:kupol_app/welcome/login/login_screen.dart';
+import 'package:kupol_app/welcome/repositories/auth_repository.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -58,9 +59,8 @@ class StartUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /// TODO: Переписать авторизацию
-    return FutureBuilder<Employee?>(
-      future: EmployeeRepository().getEmployeeInfo(),
+    return FutureBuilder<bool>(
+      future: AuthRepository().employeeHasBeenLoggedIn(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Scaffold(
@@ -70,19 +70,31 @@ class StartUp extends StatelessWidget {
           );
         }
 
-        //return SandboxScreen();
+        var hasBeenLoggedIn = snapshot.data!;
+        if (!hasBeenLoggedIn) return LoginScreen();
 
-        var employee = snapshot.data;
-        if (employee == null) return LoginScreen();
+        return FutureBuilder<Employee>(
+          future: EmployeeRepository().getEmployeeInfo(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return Scaffold(
+                body: Center(
+                  child: CircularProgressIndicator.adaptive(),
+                ),
+              );
+            }
+            var employee = snapshot.data;
+            if (employee == null) return LoginScreen();
 
-        if (employee.role == UserRole.Security) return SecurityScreen();
-        if (employee.role == UserRole.Gbr) return GbrScreen();
-        if (employee.role == UserRole.Technician) return TechnicianScreen();
-
-        return Scaffold(
-          body: Center(
-            child: Text("При авторизации что-то пошло не так..."),
-          ),
+            if (employee.role == UserRole.Security) return SecurityScreen();
+            if (employee.role == UserRole.Gbr) return GbrScreen();
+            if (employee.role == UserRole.Technician) return TechnicianScreen();
+            return Scaffold(
+              body: Center(
+                child: Text("При авторизации что-то пошло не так..."),
+              ),
+            );
+          },
         );
       },
     );
