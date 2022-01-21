@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kupol_app/constants.dart';
 import 'package:kupol_app/security/event_detail_screen.dart';
 import 'package:kupol_app/shared/events_repository.dart';
 import 'package:kupol_app/shared/models/event_model.dart';
@@ -25,27 +26,31 @@ class WorkEventsScreen extends StatelessWidget {
         }
 
         var events = snapshot.data!;
-        return Column(
-          children: List.generate(events.length, (index) {
-            return Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: EventCard(
-                event: events[index],
-                showStatus: true,
-                showButtons: true,
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => EventDetailScreen(
-                        event: events[index],
+        return SingleChildScrollView(
+          padding: kEventsScreenPaddig,
+          physics: ClampingScrollPhysics(),
+          child: Column(
+            children: List.generate(events.length, (index) {
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: EventCard(
+                  event: events[index],
+                  showStatus: true,
+                  showButtons: true,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EventDetailScreen(
+                          event: events[index],
+                        ),
                       ),
-                    ),
-                  );
-                },
-              ),
-            );
-          }),
+                    );
+                  },
+                ),
+              );
+            }),
+          ),
         );
       },
     );
