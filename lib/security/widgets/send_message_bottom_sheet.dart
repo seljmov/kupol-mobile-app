@@ -139,8 +139,9 @@ Future<void> showSendMessageBottomSheet({
                             borderRadius: BorderRadius.circular(12.0),
                             child: Image.file(
                               files[index]!,
-                              fit: BoxFit.fitHeight,
+                              width: 100,
                               height: 100,
+                              fit: BoxFit.cover,
                             ),
                           ),
                           Positioned.fill(

@@ -180,7 +180,7 @@ class ProfileScreen extends StatelessWidget {
                                               file,
                                               height: 80,
                                               width: 80,
-                                              fit: BoxFit.fitHeight,
+                                              fit: BoxFit.cover,
                                             ),
                                           ),
                                         ),
