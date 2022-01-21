@@ -3,11 +3,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kupol_app/components/full_screen_view.dart';
 import 'package:kupol_app/constants.dart';
 import 'package:kupol_app/security/widgets/event_log.dart';
-import 'package:kupol_app/security/widgets/event_technical_details_card.dart';
+import 'package:kupol_app/shared/widgets/event_technical_details_card.dart';
 import 'package:kupol_app/security/widgets/send_message_bottom_sheet.dart';
 import 'package:kupol_app/shared/models/event_model.dart';
 import 'package:kupol_app/shared/models/event_status.dart';
 import 'package:kupol_app/shared/widgets/event_status_card.dart';
+import 'package:kupol_app/shared/widgets/images_grid_view.dart';
 import 'package:kupol_app/theme.dart';
 
 class EventDetailScreen extends StatelessWidget {
@@ -81,39 +82,11 @@ class EventDetailScreen extends StatelessWidget {
                       ),
                     ),
                     SizedBox(height: 30),
-                    if (event.images != null)
-                      Padding(
-                        padding: const EdgeInsets.only(bottom: 30),
-                        child: GridView.count(
-                          physics: NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          crossAxisSpacing: 10,
-                          mainAxisSpacing: 10,
-                          crossAxisCount: 3,
-                          children: List.generate(
-                            event.images!.length,
-                            (index) {
-                              return GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => FullScreenView(
-                                        child: Image.asset(
-                                          event.images![index],
-                                        ),
-                                      ),
-                                    ),
-                                  );
-                                },
-                                child: Image.asset(
-                                  event.images![index],
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                      ),
+                    ImagesGridView(images: event.images),
+                    Visibility(
+                      visible: event.images != null,
+                      child: SizedBox(height: 30),
+                    ),
                     Visibility(
                       visible: event.status != EventStatus.New,
                       child: Padding(

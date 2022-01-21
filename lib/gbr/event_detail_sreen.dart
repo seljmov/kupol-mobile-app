@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kupol_app/components/full_screen_view.dart';
-import 'package:kupol_app/security/widgets/event_technical_details_card.dart';
+import 'package:kupol_app/shared/widgets/event_technical_details_card.dart';
 import 'package:kupol_app/shared/models/event_model.dart';
+import 'package:kupol_app/shared/widgets/images_grid_view.dart';
 
 class EventDetailScreen extends StatelessWidget {
   EventDetailScreen({Key? key, required this.event}) : super(key: key);
@@ -74,35 +75,7 @@ class EventDetailScreen extends StatelessWidget {
               ),
             ),
             SizedBox(height: 30),
-            if (event.images != null)
-              GridView.count(
-                shrinkWrap: true,
-                crossAxisSpacing: 10,
-                mainAxisSpacing: 10,
-                crossAxisCount: 3,
-                children: List.generate(
-                  event.images!.length,
-                  (index) {
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => FullScreenView(
-                              child: Image.asset(
-                                event.images![index],
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                      child: Image.asset(
-                        event.images![index],
-                      ),
-                    );
-                  },
-                ),
-              ),
+            ImagesGridView(images: event.images),
           ],
         ),
       ),

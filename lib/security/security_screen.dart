@@ -46,18 +46,12 @@ class SecurityScreen extends StatelessWidget {
             ],
           ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: 8,
-            horizontal: 12,
-          ),
-          child: TabBarView(
-            children: [
-              NewEventsScreen(),
-              WorkEventsScreen(),
-              CompletedEventsScreen(),
-            ],
-          ),
+        body: TabBarView(
+          children: [
+            NewEventsScreen(),
+            WorkEventsScreen(),
+            CompletedEventsScreen(),
+          ],
         ),
       ),
     );

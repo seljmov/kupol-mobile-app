@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kupol_app/components/employee_repository.dart';
+import 'package:kupol_app/constants.dart';
 import 'package:kupol_app/gbr/add_event_screen.dart';
 import 'package:kupol_app/gbr/empty_events_screen.dart';
 import 'package:kupol_app/gbr/event_detail_sreen.dart';
@@ -9,11 +10,13 @@ import 'package:kupol_app/shared/events_repository.dart';
 import 'package:kupol_app/shared/models/event_model.dart';
 import 'package:kupol_app/shared/widgets/event_card.dart';
 
-class EventsScreenGbr extends StatelessWidget {
-  const EventsScreenGbr({Key? key}) : super(key: key);
+class GbrScreen extends StatelessWidget {
+  const GbrScreen({Key? key}) : super(key: key);
 
-  List<Widget> _configureEventsList(
-      BuildContext context, Map<String, List<Event>> events) {
+  List<Widget> _configureEventsList({
+    required BuildContext context,
+    required Map<String, List<Event>> events,
+  }) {
     List<Widget> children = [];
 
     for (var key in events.keys) {
@@ -126,21 +129,20 @@ class EventsScreenGbr extends StatelessWidget {
 
           if (!snapshot.hasData) {
             return Center(
-              child:
-                  Text("При получении списка событий что-то пошло не так..."),
+              child: Text(
+                "При получении списка событий что-то пошло не так...",
+              ),
             );
           }
 
           var events = snapshot.data!;
-          return Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 8,
-              horizontal: 12,
-            ),
-            child: SingleChildScrollView(
-              physics: ClampingScrollPhysics(),
-              child: Column(
-                children: _configureEventsList(context, events),
+          return SingleChildScrollView(
+            padding: kEventsScreenPaddig,
+            physics: ClampingScrollPhysics(),
+            child: Column(
+              children: _configureEventsList(
+                context: context,
+                events: events,
               ),
             ),
           );
