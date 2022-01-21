@@ -228,8 +228,9 @@ class AddEventScreen extends StatelessWidget {
                               borderRadius: BorderRadius.circular(12.0),
                               child: Image.file(
                                 files[index]!,
+                                width: 100,
                                 height: 100,
-                                fit: BoxFit.fitHeight,
+                                fit: BoxFit.cover,
                               ),
                             ),
                           ),
