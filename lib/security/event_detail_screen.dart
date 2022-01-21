@@ -1,42 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:kupol_app/security/components/event_model.dart';
-import 'package:kupol_app/security/components/event_status.dart';
-import 'package:kupol_app/security/event_detail_screens/at_work_event_detail_screen.dart';
-import 'package:kupol_app/security/event_detail_screens/completed_event_detail_screen.dart';
-import 'package:kupol_app/security/event_detail_screens/new_event_detail_screen.dart';
-import 'package:kupol_app/security/event_detail_screens/on_verif_event_detail_screen.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:kupol_app/components/full_screen_view.dart';
+import 'package:kupol_app/constants.dart';
+import 'package:kupol_app/security/widgets/event_log.dart';
+import 'package:kupol_app/security/widgets/event_technical_details_card.dart';
+import 'package:kupol_app/security/widgets/send_message_bottom_sheet.dart';
+import 'package:kupol_app/shared/models/event_model.dart';
+import 'package:kupol_app/shared/models/event_status.dart';
+import 'package:kupol_app/shared/widgets/event_status_card.dart';
+import 'package:kupol_app/theme.dart';
 
 class EventDetailScreen extends StatelessWidget {
   EventDetailScreen({Key? key, required this.event}) : super(key: key);
 
   final Event event;
 
-  Widget _getScreenByStatus(Event event) {
-    if (event.status == EventStatus.New) {
-      return NewEventDetailScreen(
-        event: event,
-      );
-    }
-
-    if (event.status == EventStatus.AtWork)
-      return AtWorkEventDetailScreen(
-        event: event,
-      );
-    if (event.status == EventStatus.OnVerification)
-      return OnVerificationEventDetailScreen(
-        event: event,
-      );
-    if (event.status == EventStatus.Completed)
-      return CompletedEventDetailScreen(
-        event: event,
-      );
-    return Container();
-  }
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+      onTap: () => catchFocus(context),
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
@@ -48,7 +30,144 @@ class EventDetailScreen extends StatelessWidget {
             ),
           ),
         ),
-        body: _getScreenByStatus(event),
+        body: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: SingleChildScrollView(
+                padding: kDetailScreenPadding,
+                physics: ClampingScrollPhysics(),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    EventStatusCard(
+                      status: event.status,
+                    ),
+                    SizedBox(height: 16),
+                    Text(
+                      event.name,
+                      style: TextStyle(
+                        fontSize: 22,
+                        color: Theme.of(context).textTheme.bodyText1?.color,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    SizedBox(height: 16),
+                    Row(
+                      children: [
+                        SvgPicture.asset(
+                          "lib/assets/icons/clock.svg",
+                        ),
+                        SizedBox(width: 8),
+                        Text(
+                          event.date,
+                          style: TextStyle(
+                            color: Theme.of(context).textTheme.bodyText1?.color,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 16),
+                    EventTechnicalDetailsCard(event: event),
+                    SizedBox(height: 16),
+                    Text(
+                      event.description,
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Theme.of(context).textTheme.bodyText1?.color,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    SizedBox(height: 30),
+                    if (event.images != null)
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 30),
+                        child: GridView.count(
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 10,
+                          crossAxisCount: 3,
+                          children: List.generate(
+                            event.images!.length,
+                            (index) {
+                              return GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => FullScreenView(
+                                        child: Image.asset(
+                                          event.images![index],
+                                        ),
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: Image.asset(
+                                  event.images![index],
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ),
+                    Visibility(
+                      visible: event.status != EventStatus.New,
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 20),
+                        child: EventLog(event: event),
+                      ),
+                    ),
+                    Visibility(
+                      visible: event.status == EventStatus.OnVerification ||
+                          event.status == EventStatus.InWork,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 20),
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          height: 50,
+                          child: TextButton(
+                            onPressed: () async {
+                              await showSendMessageBottomSheet(
+                                context: context,
+                                event: event,
+                              );
+                            },
+                            style: kNotPrimaryButtonTheme,
+                            child: Text(
+                              "Добавить сообщение",
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: secondaryColor,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: kDetailScreenPadding,
+              child: Visibility(
+                visible: event.status == EventStatus.New,
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: Text("Взять в работу"),
+                  ),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

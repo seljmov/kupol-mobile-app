@@ -6,8 +6,8 @@ import 'package:kupol_app/security/events_tabs/completed_events_screen.dart';
 import 'package:kupol_app/security/events_tabs/new_events_screen.dart';
 import 'package:kupol_app/security/events_tabs/work_events_screen.dart';
 
-class EventsScreen extends StatelessWidget {
-  const EventsScreen({Key? key}) : super(key: key);
+class SecurityScreen extends StatelessWidget {
+  const SecurityScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

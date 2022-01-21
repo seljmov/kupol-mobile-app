@@ -23,6 +23,18 @@ Map<int, Color> getSwatch(Color color) {
   };
 }
 
+final kNotPrimaryButtonTheme = ButtonStyle(
+  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+    RoundedRectangleBorder(
+      side: BorderSide(
+        color: secondaryColor,
+        width: 2.0,
+      ),
+      borderRadius: BorderRadius.circular(12.0),
+    ),
+  ),
+);
+
 final primaryColor = Color(0xFFFFCD1A);
 final secondaryMaterialColor = MaterialColor(
   secondaryColor.value,

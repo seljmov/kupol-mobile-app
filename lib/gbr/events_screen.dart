@@ -5,9 +5,9 @@ import 'package:kupol_app/gbr/add_event_screen.dart';
 import 'package:kupol_app/gbr/empty_events_screen.dart';
 import 'package:kupol_app/gbr/event_detail_sreen.dart';
 import 'package:kupol_app/profile/profile_screen.dart';
-import 'package:kupol_app/security/components/event_card.dart';
-import 'package:kupol_app/security/components/event_model.dart';
-import 'package:kupol_app/security/repositories/events_repository.dart';
+import 'package:kupol_app/shared/events_repository.dart';
+import 'package:kupol_app/shared/models/event_model.dart';
+import 'package:kupol_app/shared/widgets/event_card.dart';
 
 class EventsScreenGbr extends StatelessWidget {
   const EventsScreenGbr({Key? key}) : super(key: key);

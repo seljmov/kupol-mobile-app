@@ -1,7 +1,8 @@
 import 'dart:collection';
 import 'dart:core';
-import 'package:kupol_app/security/components/event_model.dart';
-import 'package:kupol_app/security/components/event_status.dart';
+
+import 'package:kupol_app/shared/models/event_model.dart';
+import 'package:kupol_app/shared/models/event_status.dart';
 
 class EventsRepository {
   List<Event> _events = [
@@ -32,7 +33,7 @@ class EventsRepository {
       id: 2,
       creatorName: "Иванов И.И.",
       executorName: "Селимов З.М.",
-      status: EventStatus.AtWork,
+      status: EventStatus.InWork,
       name: "Работоспособность камеры видеонаблюдения",
       category: "Вандальные действия, повреждение и порча имущества",
       address: "ООО Зеленые сады",
@@ -82,7 +83,7 @@ class EventsRepository {
   Future<List<Event>> getWorkEvents() async {
     var events = _events.where(
       (event) =>
-          event.status == EventStatus.AtWork ||
+          event.status == EventStatus.InWork ||
           event.status == EventStatus.OnVerification,
     );
     return events.toList();
@@ -124,7 +125,6 @@ class EventsRepository {
       }
     });
 
-    // var v = SplayTreeMap.from(events);
     return events;
   }
 }

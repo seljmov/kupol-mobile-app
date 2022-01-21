@@ -1,10 +1,8 @@
-import 'package:kupol_app/security/components/event_status.dart';
-
 class Event {
   final int id;
   final String creatorName;
   final String? executorName;
-  final EventStatus status;
+  final String status;
   final String name;
   final String category;
   final String address;
