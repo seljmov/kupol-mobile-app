@@ -6,13 +6,20 @@ import 'package:kupol_app/gbr/gbr_screen.dart';
 import 'package:kupol_app/security/security_screen.dart';
 import 'package:kupol_app/shared/repositories/employee_repository.dart';
 import 'package:kupol_app/technician/technician_screen.dart';
+import 'package:kupol_app/theme.dart';
 import 'package:kupol_app/welcome/repositories/auth_repository.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
 
-  final _loginController = TextEditingController(text: "testtech");
-  final _passwordController = TextEditingController(text: "testtech");
+  final _loginController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _canAuthorizeNotifier = ValueNotifier<bool>(false);
+
+  bool _verifyAbilityToAuthorize() {
+    return _loginController.text.isNotEmpty &&
+        _passwordController.text.isNotEmpty;
+  }
 
   Future<void> _authorizeUser(
     BuildContext context,
@@ -95,6 +102,9 @@ class LoginScreen extends StatelessWidget {
               ),
               SizedBox(height: 24),
               TextFormField(
+                onChanged: (value) {
+                  _canAuthorizeNotifier.value = _verifyAbilityToAuthorize();
+                },
                 style: TextStyle(
                   color: Theme.of(context).textTheme.bodyText2?.color,
                 ),
@@ -107,6 +117,9 @@ class LoginScreen extends StatelessWidget {
               ),
               SizedBox(height: 10),
               TextFormField(
+                onChanged: (value) {
+                  _canAuthorizeNotifier.value = _verifyAbilityToAuthorize();
+                },
                 style: TextStyle(
                   color: Theme.of(context).textTheme.bodyText2?.color,
                 ),
@@ -119,13 +132,37 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () async => _authorizeUser(
-                  context,
-                  _loginController.text,
-                  _passwordController.text,
-                ),
-                child: Text("Войти"),
+              ValueListenableBuilder<bool>(
+                valueListenable: _canAuthorizeNotifier,
+                builder: (context, canAuthorize, child) {
+                  var backgroundColor = Theme.of(context).disabledColor;
+                  var foregroundColor = backgroundColor == lightDisableColor
+                      ? darkTextPrimaryColor
+                      : lightTextSecondaryColor;
+                  return Visibility(
+                    visible: canAuthorize,
+                    child: ElevatedButton(
+                      onPressed: () async => _authorizeUser(
+                        context,
+                        _loginController.text,
+                        _passwordController.text,
+                      ),
+                      child: Text("Войти"),
+                    ),
+                    replacement: ElevatedButton(
+                      onPressed: () {},
+                      child: Text("Войти"),
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                          backgroundColor,
+                        ),
+                        foregroundColor: MaterialStateProperty.all<Color>(
+                          foregroundColor,
+                        ),
+                      ),
+                    ),
+                  );
+                },
               ),
             ],
           ),

@@ -547,12 +547,10 @@ class EntityDetailsScreen extends StatelessWidget {
                                 children: [
                                   SvgPicture.asset(
                                     "lib/assets/icons/doc.svg",
-                                    color: !isEditable
-                                        ? Theme.of(context)
-                                            .textTheme
-                                            .bodyText2
-                                            ?.color
-                                        : hintColor,
+                                    color: Theme.of(context)
+                                        .textTheme
+                                        .bodyText2
+                                        ?.color,
                                   ),
                                   SizedBox(width: 16),
                                   Text(
