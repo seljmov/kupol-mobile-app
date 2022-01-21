@@ -10,7 +10,7 @@ final kEventNewAtWorkColor = Color(0xFF0075B0);
 final kEventCompletedStatusColor = Color(0xFF4F4E4E);
 
 /// symmetric(vertical: 16, horizontal: 20)
-const kEventsScreenPaddig = const EdgeInsets.symmetric(
+const kEventsScreenPadding = const EdgeInsets.symmetric(
   vertical: 16,
   horizontal: 20,
 );
@@ -19,6 +19,12 @@ const kEventsScreenPaddig = const EdgeInsets.symmetric(
 const kDetailScreenPadding = const EdgeInsets.symmetric(
   vertical: 10,
   horizontal: 24,
+);
+
+/// symmetric(vertical: 16, horizontal: 20)
+const kCardPadding = const EdgeInsets.symmetric(
+  vertical: 16,
+  horizontal: 20,
 );
 
 /// SizedBox(height: 48)

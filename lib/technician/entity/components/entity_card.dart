@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:kupol_app/constants.dart';
 import 'package:kupol_app/technician/entity/components/entity_model.dart';
 
 class EntityCard extends StatelessWidget {
@@ -9,13 +10,9 @@ class EntityCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: Рефакторинг переходов по карточке
     return Card(
       child: Padding(
-        padding: const EdgeInsets.symmetric(
-          vertical: 20,
-          horizontal: 16,
-        ),
+        padding: kCardPadding,
         child: Column(
           children: [
             Column(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kupol_app/constants.dart';
 import 'package:kupol_app/technician/requests/components/request_card.dart';
 import 'package:kupol_app/technician/requests/empty_requests_screen.dart';
 import 'package:kupol_app/technician/requests/components/request_model.dart';
@@ -28,14 +29,12 @@ class RequestsScreen extends StatelessWidget {
         var requests = snapshot.data!;
         if (requests.isEmpty) return EmptyRequestsScreen();
         return SingleChildScrollView(
+          padding: kEventsScreenPadding,
           physics: ClampingScrollPhysics(),
           child: Column(
             children: List.generate(requests.length, (index) {
               return Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 4,
-                  horizontal: 8,
-                ),
+                padding: const EdgeInsets.only(bottom: 8),
                 child: GestureDetector(
                   onTap: () {
                     Navigator.of(context).push(

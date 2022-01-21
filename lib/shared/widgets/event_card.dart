@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:kupol_app/constants.dart';
 import 'package:kupol_app/shared/models/event_model.dart';
 import 'package:kupol_app/shared/models/event_status.dart';
 import 'package:kupol_app/shared/widgets/event_status_card.dart';
@@ -30,10 +31,7 @@ class EventCard extends StatelessWidget {
       onTap: onTap,
       child: Card(
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: 20,
-            horizontal: 16,
-          ),
+          padding: kCardPadding,
           child: Column(
             children: [
               Column(

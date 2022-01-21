@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:kupol_app/constants.dart';
 import 'package:kupol_app/technician/requests/components/request_model.dart';
 
 class RequestCard extends StatelessWidget {
@@ -12,10 +13,7 @@ class RequestCard extends StatelessWidget {
     return GestureDetector(
       child: Card(
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: 20,
-            horizontal: 16,
-          ),
+          padding: kCardPadding,
           child: Column(
             children: [
               Column(

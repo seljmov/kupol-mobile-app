@@ -54,17 +54,11 @@ class TechnicianScreen extends StatelessWidget {
             },
           ),
         ),
-        body: Padding(
-          padding: const EdgeInsets.symmetric(
-            vertical: 8,
-            horizontal: 12,
-          ),
-          child: TabBarView(
-            children: [
-              RequestsScreen(),
-              EntitiesScreen(),
-            ],
-          ),
+        body: TabBarView(
+          children: [
+            RequestsScreen(),
+            EntitiesScreen(),
+          ],
         ),
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kupol_app/constants.dart';
 import 'package:kupol_app/technician/entity/components/entity_card.dart';
 import 'package:kupol_app/technician/entity/empty_entities_screen.dart';
 import 'package:kupol_app/technician/entity/components/entity_model.dart';
@@ -28,14 +29,12 @@ class EntitiesScreen extends StatelessWidget {
         var entities = snapshot.data!;
         if (entities.isEmpty) return EmptyEntitiesScreen();
         return SingleChildScrollView(
+          padding: kEventsScreenPadding,
           physics: ClampingScrollPhysics(),
           child: Column(
             children: List.generate(entities.length, (index) {
               return Padding(
-                padding: const EdgeInsets.symmetric(
-                  vertical: 4,
-                  horizontal: 8,
-                ),
+                padding: const EdgeInsets.only(bottom: 8),
                 child: GestureDetector(
                   onTap: () {
                     Navigator.push(

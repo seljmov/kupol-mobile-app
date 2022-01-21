@@ -27,7 +27,7 @@ class NewEventsScreen extends StatelessWidget {
 
         var events = snapshot.data!;
         return SingleChildScrollView(
-          padding: kEventsScreenPaddig,
+          padding: kEventsScreenPadding,
           physics: ClampingScrollPhysics(),
           child: Column(
             children: List.generate(events.length, (index) {
