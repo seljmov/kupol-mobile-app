@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:kupol_app/security/components/event_model.dart';
-import 'package:kupol_app/security/components/event_status.dart';
-import 'package:kupol_app/security/components/event_status_card.dart';
+import 'package:kupol_app/shared/models/event_model.dart';
+import 'package:kupol_app/shared/models/event_status.dart';
+import 'package:kupol_app/shared/widgets/event_status_card.dart';
 
-// TODO: Создать общий EventsScrollList
 class EventCard extends StatelessWidget {
   EventCard({
     Key? key,
@@ -53,8 +52,10 @@ class EventCard extends StatelessWidget {
                         ),
                       ),
                       SizedBox(width: 8),
-                      if (showStatus == true)
-                        EventStatusCard(status: event.status),
+                      Visibility(
+                        visible: showStatus == true,
+                        child: EventStatusCard(status: event.status),
+                      )
                     ],
                   ),
                   SizedBox(height: 8),
@@ -87,14 +88,16 @@ class EventCard extends StatelessWidget {
                   ),
                 ],
               ),
-              if (event.status == EventStatus.New && showButtons == true)
-                Padding(
+              Visibility(
+                visible: event.status == EventStatus.New && showButtons == true,
+                child: Padding(
                   padding: const EdgeInsets.only(top: 12),
                   child: ElevatedButton(
                     onPressed: () {},
                     child: Text("Взять в работу"),
                   ),
                 ),
+              ),
             ],
           ),
         ),

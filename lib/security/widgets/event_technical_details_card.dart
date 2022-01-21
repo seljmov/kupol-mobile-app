@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:kupol_app/local/employee_service.dart';
-import 'package:kupol_app/security/components/event_model.dart';
+import 'package:kupol_app/shared/models/event_model.dart';
 
 class EventTechnicalDetailsCard extends StatelessWidget {
   EventTechnicalDetailsCard({Key? key, required this.event}) : super(key: key);
 
   final Event event;
 
-  String getExecutorRoleName(String executorName) {
+  String _getExecutorRoleName(String executorName) {
     var user = EmployeeService().getEmployeeByFullname(executorName);
 
     return user.role;
@@ -54,7 +54,7 @@ class EventTechnicalDetailsCard extends StatelessWidget {
                   ),
                   TextSpan(
                     text:
-                        "${event.executorName} (${getExecutorRoleName(event.executorName!)})",
+                        "${event.executorName} (${_getExecutorRoleName(event.executorName!)})",
                     style: TextStyle(
                       fontSize: 14,
                       color: Theme.of(context).textTheme.bodyText2?.color,

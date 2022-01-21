@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kupol_app/shared/models/event_status.dart';
 
 /// value -> "error:"
 final errorPattern = "error:";
@@ -20,3 +21,13 @@ const kBottomSizedBox = SizedBox(height: 48);
 /// (context) => FocusScope.of(context).requestFocus(FocusNode());
 final catchFocus =
     (context) => FocusScope.of(context).requestFocus(FocusNode());
+
+/// Возвращает цвет по статусу события
+Color getEventStatusColor(String status) {
+  if (status == EventStatus.New) return kEventNewStatusColor;
+  if (status == EventStatus.InWork) return kEventNewAtWorkColor;
+  if (status == EventStatus.OnVerification)
+    return kEventOnVerificationStatusColor;
+  if (status == EventStatus.Completed) return kEventCompletedStatusColor;
+  return kEventNewAtWorkColor;
+}

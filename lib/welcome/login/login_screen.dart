@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kupol_app/constants.dart';
-import 'package:kupol_app/security/events_screen.dart';
+import 'package:kupol_app/security/security_screen.dart';
 import 'package:kupol_app/welcome/repositories/auth_repository.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -54,7 +54,7 @@ class LoginScreen extends StatelessWidget {
       context,
       MaterialPageRoute(
         // TODO: Изменить переход
-        builder: (context) => EventsScreen(),
+        builder: (context) => SecurityScreen(),
       ),
     );
   }
