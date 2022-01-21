@@ -2,12 +2,12 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:kupol_app/components/change_theme_notifier.dart';
-import 'package:kupol_app/components/employee_model.dart';
-import 'package:kupol_app/components/employee_repository.dart';
-import 'package:kupol_app/components/full_screen_view.dart';
-import 'package:kupol_app/components/image_selector.dart';
-import 'package:kupol_app/components/settings_repository.dart';
+import 'package:kupol_app/change_theme_notifier.dart';
+import 'package:kupol_app/shared/models/employee_model.dart';
+import 'package:kupol_app/shared/repositories/employee_repository.dart';
+import 'package:kupol_app/shared/repositories/settings_repository.dart';
+import 'package:kupol_app/shared/widgets/full_screen_view.dart';
+import 'package:kupol_app/shared/widgets/image_selector.dart';
 import 'package:kupol_app/profile/components/default_profile_avatar.dart';
 import 'package:kupol_app/profile/components/edit_avatar_button.dart';
 import 'package:kupol_app/theme.dart';
@@ -24,7 +24,7 @@ class ProfileScreen extends StatelessWidget {
   final _profileImageNotifier = ValueNotifier<File?>(null);
 
   Future<void> _logoutEmployee(BuildContext context) async {
-    await EmployeeRepository().removeInfo();
+    await EmployeeRepository().removeInfoFromStorage();
     Navigator.pushAndRemoveUntil(
       context,
       MaterialPageRoute(
@@ -48,7 +48,7 @@ class ProfileScreen extends StatelessWidget {
       login: employee.login,
       password: employee.password,
     );
-    await EmployeeRepository().removeInfo();
+
     await EmployeeRepository().saveEmployeeInfo(
       newEmployee.toJson(),
     );

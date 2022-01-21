@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:kupol_app/components/employee_model.dart';
+import 'package:kupol_app/shared/models/employee_model.dart';
 
 class EmployeeRepository {
   static const _employeeInfoKey = "employee_info";
@@ -22,8 +22,14 @@ class EmployeeRepository {
   }
 
   /// Удалить информацию о пользователе
-  Future<void> removeInfo() async {
+  Future<void> removeEmployeeInfo() async {
     final storage = new FlutterSecureStorage();
     await storage.delete(key: _employeeInfoKey);
+  }
+
+  /// Удалить всю нформацию из хранилища
+  Future<void> removeInfoFromStorage() async {
+    final storage = new FlutterSecureStorage();
+    await storage.deleteAll();
   }
 }

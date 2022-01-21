@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:kupol_app/components/employee_repository.dart';
 import 'package:kupol_app/profile/profile_screen.dart';
 import 'package:kupol_app/security/events_tabs/completed_events_screen.dart';
 import 'package:kupol_app/security/events_tabs/new_events_screen.dart';
 import 'package:kupol_app/security/events_tabs/work_events_screen.dart';
+import 'package:kupol_app/shared/repositories/employee_repository.dart';
 
 class SecurityScreen extends StatelessWidget {
   const SecurityScreen({Key? key}) : super(key: key);

@@ -3,7 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:kupol_app/components/image_select_button.dart';
+import 'package:kupol_app/shared/components/image_select_button.dart';
 import 'package:kupol_app/constants.dart';
 import 'package:kupol_app/shared/models/event_model.dart';
 import 'package:kupol_app/theme.dart';

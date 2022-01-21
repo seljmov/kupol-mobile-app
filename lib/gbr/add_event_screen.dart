@@ -2,9 +2,9 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:kupol_app/components/bottom_sheet_picker.dart';
-import 'package:kupol_app/components/full_screen_view.dart';
-import 'package:kupol_app/components/image_select_button.dart';
+import 'package:kupol_app/gbr/bottom_sheet_picker.dart';
+import 'package:kupol_app/shared/widgets/full_screen_view.dart';
+import 'package:kupol_app/shared/components/image_select_button.dart';
 import 'package:kupol_app/constants.dart';
 
 class AddEventScreen extends StatelessWidget {

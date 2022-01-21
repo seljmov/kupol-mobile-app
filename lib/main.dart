@@ -1,12 +1,12 @@
 import 'package:easy_dynamic_theme/easy_dynamic_theme.dart';
 import 'package:flutter/material.dart';
-import 'package:kupol_app/components/change_theme_notifier.dart';
-import 'package:kupol_app/components/employee_model.dart';
-import 'package:kupol_app/components/employee_repository.dart';
-import 'package:kupol_app/components/settings_repository.dart';
+import 'package:kupol_app/change_theme_notifier.dart';
+import 'package:kupol_app/shared/models/employee_model.dart';
 import 'package:kupol_app/shared/models/user_role.dart';
 import 'package:kupol_app/gbr/gbr_screen.dart';
 import 'package:kupol_app/security/security_screen.dart';
+import 'package:kupol_app/shared/repositories/employee_repository.dart';
+import 'package:kupol_app/shared/repositories/settings_repository.dart';
 import 'package:kupol_app/technician/technician_screen.dart';
 import 'package:kupol_app/theme.dart';
 import 'package:kupol_app/welcome/login/login_screen.dart';

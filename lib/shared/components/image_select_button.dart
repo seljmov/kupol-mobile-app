@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:kupol_app/components/image_selector.dart';
+import 'package:kupol_app/shared/widgets/image_selector.dart';
 
 class ImageSelectButton extends StatelessWidget {
   ImageSelectButton({Key? key, required this.imagesFiles}) : super(key: key);

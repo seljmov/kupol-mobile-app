@@ -1,4 +1,4 @@
-import 'package:kupol_app/components/employee_model.dart';
+import 'package:kupol_app/shared/models/employee_model.dart';
 import 'package:collection/collection.dart';
 import 'package:kupol_app/shared/models/user_role.dart';
 
