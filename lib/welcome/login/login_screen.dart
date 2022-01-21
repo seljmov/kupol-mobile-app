@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:kupol_app/components/employee_repository.dart';
 import 'package:kupol_app/shared/models/user_role.dart';
 import 'package:kupol_app/constants.dart';
 import 'package:kupol_app/gbr/gbr_screen.dart';
 import 'package:kupol_app/security/security_screen.dart';
+import 'package:kupol_app/shared/repositories/employee_repository.dart';
 import 'package:kupol_app/technician/technician_screen.dart';
 import 'package:kupol_app/welcome/repositories/auth_repository.dart';
 

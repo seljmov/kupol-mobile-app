@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:kupol_app/components/employee_repository.dart';
 import 'package:kupol_app/constants.dart';
 import 'package:kupol_app/gbr/add_event_screen.dart';
 import 'package:kupol_app/gbr/empty_events_screen.dart';
 import 'package:kupol_app/gbr/event_detail_sreen.dart';
 import 'package:kupol_app/profile/profile_screen.dart';
-import 'package:kupol_app/shared/events_repository.dart';
 import 'package:kupol_app/shared/models/event_model.dart';
+import 'package:kupol_app/shared/repositories/employee_repository.dart';
+import 'package:kupol_app/shared/repositories/events_repository.dart';
 import 'package:kupol_app/shared/widgets/event_card.dart';
 
 class GbrScreen extends StatelessWidget {

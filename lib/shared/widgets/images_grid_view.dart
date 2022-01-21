@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kupol_app/components/full_screen_view.dart';
+import 'package:kupol_app/shared/widgets/full_screen_view.dart';
 
 class ImagesGridView extends StatelessWidget {
   ImagesGridView({Key? key, required this.images}) : super(key: key);

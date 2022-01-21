@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:kupol_app/components/employee_repository.dart';
 import 'package:kupol_app/profile/profile_screen.dart';
+import 'package:kupol_app/shared/repositories/employee_repository.dart';
 import 'package:kupol_app/technician/entity/entities_screen.dart';
 import 'package:kupol_app/technician/requests/requests_screen.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:kupol_app/components/employee_repository.dart';
 import 'package:kupol_app/local/employee_service.dart';
+import 'package:kupol_app/shared/repositories/employee_repository.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AuthRepository {
