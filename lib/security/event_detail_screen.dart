@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:kupol_app/components/full_screen_view.dart';
 import 'package:kupol_app/constants.dart';
 import 'package:kupol_app/security/widgets/event_log.dart';
 import 'package:kupol_app/shared/widgets/event_technical_details_card.dart';

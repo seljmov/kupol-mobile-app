@@ -40,7 +40,7 @@ class GbrScreen extends StatelessWidget {
               keyEvents.length,
               (index) {
                 return Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.only(bottom: 8),
                   child: EventCard(
                     event: keyEvents[index],
                     onTap: () {
