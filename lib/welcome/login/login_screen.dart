@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:kupol_app/components/employee_repository.dart';
+import 'package:kupol_app/shared/models/user_role.dart';
 import 'package:kupol_app/constants.dart';
+import 'package:kupol_app/gbr/gbr_screen.dart';
 import 'package:kupol_app/security/security_screen.dart';
+import 'package:kupol_app/technician/technician_screen.dart';
 import 'package:kupol_app/welcome/repositories/auth_repository.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -11,8 +15,11 @@ class LoginScreen extends StatelessWidget {
   final _passwordController = TextEditingController(text: "testtech");
 
   Future<void> _authorizeUser(
-      BuildContext context, String login, String password) async {
-    var response = await AuthRepository().authorizeUser(login, password);
+    BuildContext context,
+    String login,
+    String password,
+  ) async {
+    var response = await AuthRepository().authorizeEmployee(login, password);
     var endedWithError = response.toLowerCase().contains(errorPattern);
 
     if (endedWithError) {
@@ -50,11 +57,20 @@ class LoginScreen extends StatelessWidget {
       return;
     }
 
+    var employee = await EmployeeRepository().getEmployeeInfo();
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        // TODO: Изменить переход
-        builder: (context) => SecurityScreen(),
+        builder: (context) {
+          if (employee.role == UserRole.Security) return SecurityScreen();
+          if (employee.role == UserRole.Gbr) return GbrScreen();
+          if (employee.role == UserRole.Technician) return TechnicianScreen();
+          return Scaffold(
+            body: Center(
+              child: Text("При авторизации что-то пошло не так..."),
+            ),
+          );
+        },
       ),
     );
   }

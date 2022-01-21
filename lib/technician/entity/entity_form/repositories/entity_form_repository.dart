@@ -1,4 +1,4 @@
-import 'package:kupol_app/components/user_role.dart';
+import 'package:kupol_app/shared/models/user_role.dart';
 import 'package:kupol_app/technician/entity/entity_form/plumes/components/plume_model.dart';
 import 'package:kupol_app/technician/entity/entity_form/sections/components/section_model.dart';
 import 'package:kupol_app/technician/entity/entity_form/users/components/user_model.dart';

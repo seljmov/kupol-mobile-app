@@ -227,7 +227,6 @@ class EntityDetailsScreen extends StatelessWidget {
                                             ),
                                     ),
                                   ),
-                                  // TODO: Переписать все условия на visibility
                                   Visibility(
                                     visible: isEditable,
                                     child: Positioned.fill(

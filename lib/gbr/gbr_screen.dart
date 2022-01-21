@@ -107,7 +107,7 @@ class GbrScreen extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ProfileScreen(employee: employee!),
+                  builder: (context) => ProfileScreen(employee: employee),
                 ),
               );
             },
