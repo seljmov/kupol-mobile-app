@@ -67,7 +67,7 @@ var lightThemeData = new ThemeData(
   scaffoldBackgroundColor: Color(0xFFFFFFFF),
   brightness: Brightness.light,
   hintColor: hintColor,
-  fontFamily: "Open Sans",
+  fontFamily: "OpenSans",
   focusColor: primaryColor,
   disabledColor: lightDisableColor,
   indicatorColor: secondaryColor,
@@ -87,7 +87,7 @@ var lightThemeData = new ThemeData(
     bodyText2: TextStyle(
       color: lightTextSecondaryColor,
     ),
-  ),
+  ).apply(fontFamily: "OpenSans"),
   textSelectionTheme: TextSelectionThemeData(
     selectionColor: secondaryColor,
   ),
@@ -152,7 +152,7 @@ var darkThemeData = ThemeData(
   scaffoldBackgroundColor: darkColor,
   brightness: Brightness.dark,
   hintColor: hintColor,
-  fontFamily: "Open Sans",
+  fontFamily: "OpenSans",
   focusColor: primaryColor,
   disabledColor: darkDisableColor,
   indicatorColor: secondaryColor,
@@ -166,7 +166,7 @@ var darkThemeData = ThemeData(
     bodyText2: TextStyle(
       color: darkTextSecondaryColor,
     ),
-  ),
+  ).apply(fontFamily: "OpenSans"),
   textSelectionTheme: TextSelectionThemeData(
     selectionColor: secondaryColor,
   ),
