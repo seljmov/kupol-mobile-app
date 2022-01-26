@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:awesome_dialog/awesome_dialog.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kupol_app/change_theme_notifier.dart';
@@ -189,10 +190,11 @@ class ProfileScreen extends StatelessWidget {
                                     bottom: 0,
                                     child: GestureDetector(
                                       onTap: () async {
-                                        var file = await ImageSeletor()
+                                        var images = await ImageSeletor()
                                             .select(context);
-                                        if (file != null) {
-                                          _profileImageNotifier.value = file;
+                                        if (images.length > 0) {
+                                          _profileImageNotifier.value =
+                                              images.first.file;
                                         }
                                       },
                                       child: EditAvatarButton(),
@@ -318,6 +320,88 @@ class ProfileScreen extends StatelessWidget {
                       width: MediaQuery.of(context).size.width,
                       height: 50,
                       child: TextButton(
+                        onPressed: () {
+                          AwesomeDialog(
+                            context: context,
+                            dialogType: DialogType.NO_HEADER,
+                            headerAnimationLoop: false,
+                            customHeader: Padding(
+                              padding: const EdgeInsets.all(4.0),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  color: secondaryColor,
+                                ),
+                                child: Center(
+                                  child: Icon(
+                                    Icons.door_back_door_outlined,
+                                    size: 48,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            title: "Выход из приложения",
+                            desc: "Вы точно ходите выйти из приложения?",
+                            btnCancel: SizedBox(
+                              height: 40,
+                              child: ElevatedButton(
+                                onPressed: () => Navigator.pop(context),
+                                child: Text("Отмена"),
+                                style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                    Colors.grey,
+                                  ),
+                                  foregroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                    Colors.white,
+                                  ),
+                                  shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                      side: BorderSide(
+                                        color: Colors.grey,
+                                        width: 2.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(12.0),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            btnOk: SizedBox(
+                              height: 40,
+                              child: ElevatedButton(
+                                onPressed: () async {
+                                  await _logoutEmployee(context);
+                                },
+                                child: Text("Да"),
+                                style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                    Colors.redAccent,
+                                  ),
+                                  foregroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                    Colors.white,
+                                  ),
+                                  shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                      side: BorderSide(
+                                        color: Colors.redAccent,
+                                        width: 2.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(12.0),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          )..show();
+                        },
+                        /*
                         onPressed: () => showDialog<String>(
                           barrierColor: Colors.black87,
                           context: context,
@@ -347,6 +431,7 @@ class ProfileScreen extends StatelessWidget {
                             ],
                           ),
                         ),
+                        */
                         style: ButtonStyle(
                           shape:
                               MaterialStateProperty.all<RoundedRectangleBorder>(

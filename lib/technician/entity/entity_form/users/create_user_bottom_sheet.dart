@@ -151,137 +151,148 @@ Future<void> showCreateUserBottomSheet({
                     ),
                   ),
                   SizedBox(height: 10),
-                  TextField(
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Theme.of(context).textTheme.bodyText1?.color,
-                      fontWeight: FontWeight.w600,
-                    ),
-                    controller: addressController,
-                    keyboardType: TextInputType.streetAddress,
-                    decoration: InputDecoration(
-                      labelText: "Адрес",
-                      labelStyle: TextStyle(
-                        fontSize: 18,
-                        color: Theme.of(context).textTheme.bodyText2?.color,
-                        fontWeight: FontWeight.w400,
-                      ),
-                      hintStyle: TextStyle(
-                        fontSize: 18,
-                        color: Theme.of(context).textTheme.bodyText2?.color,
-                      ),
-                      floatingLabelBehavior: FloatingLabelBehavior.always,
-                    ),
-                  ),
-                  SizedBox(height: 20),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        "PIN",
-                        style: TextStyle(
-                          fontSize: 16,
-                          color: Theme.of(context).textTheme.bodyText2?.color,
-                          fontWeight: FontWeight.w400,
-                        ),
-                      ),
-                      PinCodeTextField(
-                        controller: pinController,
-                        appContext: context,
-                        length: 4,
-                        onChanged: (value) {
-                          print(value);
-                        },
-                        keyboardType: TextInputType.number,
-                        showCursor: false,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        textStyle: TextStyle(
-                          fontSize: 16,
-                          color: hintColor,
-                          fontWeight: FontWeight.w600,
-                        ),
-                        pastedTextStyle: TextStyle(
-                          fontSize: 16,
-                          color: hintColor,
-                          fontWeight: FontWeight.w600,
-                        ),
-                        pinTheme: PinTheme(
-                          fieldOuterPadding: EdgeInsets.only(right: 12),
-                          fieldWidth: 30,
-                          fieldHeight: 40,
-                          shape: PinCodeFieldShape.underline,
-                          activeColor: secondaryGreyColor,
-                          inactiveColor: secondaryGreyColor,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 30),
                   Padding(
                     padding: EdgeInsets.only(
-                      bottom: MediaQuery.of(context).viewInsets.bottom / 1.5,
+                      bottom: MediaQuery.of(context).viewInsets.bottom /
+                          kBottomKeyboardPaddingCoef,
                     ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    child: Column(
                       children: [
-                        TextButton(
-                          onPressed: () => Navigator.of(context).pop(),
-                          style: ButtonStyle(
-                            fixedSize: MaterialStateProperty.all<Size>(
-                              Size(
-                                MediaQuery.of(context).size.width * 0.425,
-                                50.0,
-                              ),
-                            ),
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                side: BorderSide(
-                                  color: secondaryColor,
-                                  width: 2.0,
-                                ),
-                                borderRadius: BorderRadius.circular(12.0),
-                              ),
-                            ),
+                        TextField(
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Theme.of(context).textTheme.bodyText1?.color,
+                            fontWeight: FontWeight.w600,
                           ),
-                          child: Text(
-                            "Отмена",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: secondaryColor,
-                              fontWeight: FontWeight.w600,
+                          controller: addressController,
+                          keyboardType: TextInputType.streetAddress,
+                          decoration: InputDecoration(
+                            labelText: "Адрес",
+                            labelStyle: TextStyle(
+                              fontSize: 18,
+                              color:
+                                  Theme.of(context).textTheme.bodyText2?.color,
+                              fontWeight: FontWeight.w400,
                             ),
+                            hintStyle: TextStyle(
+                              fontSize: 18,
+                              color:
+                                  Theme.of(context).textTheme.bodyText2?.color,
+                            ),
+                            floatingLabelBehavior: FloatingLabelBehavior.always,
                           ),
                         ),
-                        TextButton(
-                          onPressed: () => Navigator.of(context).pop(),
-                          style: ButtonStyle(
-                            fixedSize: MaterialStateProperty.all<Size>(
-                              Size(
-                                MediaQuery.of(context).size.width * 0.425,
-                                50.0,
+                        SizedBox(height: 20),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Text(
+                              "PIN",
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: Theme.of(context)
+                                    .textTheme
+                                    .bodyText2
+                                    ?.color,
+                                fontWeight: FontWeight.w400,
                               ),
                             ),
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                              primaryColor,
-                            ),
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(12.0),
+                            PinCodeTextField(
+                              controller: pinController,
+                              appContext: context,
+                              length: 4,
+                              onChanged: (value) {
+                                print(value);
+                              },
+                              keyboardType: TextInputType.number,
+                              showCursor: false,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              textStyle: TextStyle(
+                                fontSize: 16,
+                                color: hintColor,
+                                fontWeight: FontWeight.w600,
+                              ),
+                              pastedTextStyle: TextStyle(
+                                fontSize: 16,
+                                color: hintColor,
+                                fontWeight: FontWeight.w600,
+                              ),
+                              pinTheme: PinTheme(
+                                fieldOuterPadding: EdgeInsets.only(right: 12),
+                                fieldWidth: 30,
+                                fieldHeight: 40,
+                                shape: PinCodeFieldShape.underline,
+                                activeColor: secondaryGreyColor,
+                                inactiveColor: secondaryGreyColor,
                               ),
                             ),
-                          ),
-                          child: Text(
-                            "Сохранить",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: darkColor,
-                              fontWeight: FontWeight.w600,
+                          ],
+                        ),
+                        SizedBox(height: 30),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            TextButton(
+                              onPressed: () => Navigator.of(context).pop(),
+                              style: ButtonStyle(
+                                fixedSize: MaterialStateProperty.all<Size>(
+                                  Size(
+                                    MediaQuery.of(context).size.width * 0.425,
+                                    50.0,
+                                  ),
+                                ),
+                                shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                    side: BorderSide(
+                                      color: secondaryColor,
+                                      width: 2.0,
+                                    ),
+                                    borderRadius: BorderRadius.circular(12.0),
+                                  ),
+                                ),
+                              ),
+                              child: Text(
+                                "Отмена",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: secondaryColor,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
                             ),
-                          ),
+                            TextButton(
+                              onPressed: () => Navigator.of(context).pop(),
+                              style: ButtonStyle(
+                                fixedSize: MaterialStateProperty.all<Size>(
+                                  Size(
+                                    MediaQuery.of(context).size.width * 0.425,
+                                    50.0,
+                                  ),
+                                ),
+                                backgroundColor:
+                                    MaterialStateProperty.all<Color>(
+                                  primaryColor,
+                                ),
+                                shape: MaterialStateProperty.all<
+                                    RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(12.0),
+                                  ),
+                                ),
+                              ),
+                              child: Text(
+                                "Сохранить",
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: darkColor,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),

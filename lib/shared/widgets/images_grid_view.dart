@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kupol_app/shared/widgets/full_screen_view.dart';
+import 'package:kupol_app/shared/components/multi_image_model.dart';
+import 'package:kupol_app/shared/widgets/full_screen_images_carousel.dart';
 
 class ImagesGridView extends StatelessWidget {
   ImagesGridView({Key? key, required this.images}) : super(key: key);
@@ -24,9 +25,10 @@ class ImagesGridView extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => FullScreenView(
-                          child: Image.asset(
-                            images![index],
+                        builder: (context) => FullScreenImagesCarousel(
+                          currentIndex: index,
+                          images: List<MultiImage>.of(
+                            images!.map((e) => MultiImage(path: e)),
                           ),
                         ),
                       ),

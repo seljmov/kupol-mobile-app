@@ -3,23 +3,35 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:kupol_app/shared/components/multi_image_model.dart';
 import 'package:kupol_app/theme.dart';
 
 class ImageSeletor {
-  Future<File?> _pickImage(ImageSource source) async {
+  Future<File?> _pickImageFromCamera() async {
     try {
       final _picker = ImagePicker();
-      var pickedFile = await _picker.pickImage(source: source);
-      return File(pickedFile!.path);
+      var pickedFile = await _picker.pickImage(source: ImageSource.camera);
+      return pickedFile == null ? null : File(pickedFile.path);
     } catch (e) {
-      print("ImageSeletor -> pickImage() -> e -> $e");
+      print("ImageSeletor -> _pickImageFromCamera() -> e -> $e");
     }
-
     return null;
   }
 
-  Future<File?> select(BuildContext context) async {
-    File? file;
+  Future<List<File>?> _pickImagesFromGallery() async {
+    try {
+      final _picker = ImagePicker();
+      var pickedFileList = await _picker.pickMultiImage();
+      return pickedFileList == null
+          ? null
+          : List.of(pickedFileList.map((e) => File(e.path)));
+    } catch (e) {
+      print("_pickImagesFromGallery() -> e -> $e");
+    }
+  }
+
+  Future<List<MultiImage>> select(BuildContext context) async {
+    List<File> myFiles = [];
     await showModalBottomSheet(
       context: context,
       shape: RoundedRectangleBorder(
@@ -56,7 +68,10 @@ class ImageSeletor {
             ),
             title: Text("С камеры"),
             onTap: () async {
-              file = await _pickImage(ImageSource.camera);
+              var file = await _pickImageFromCamera();
+              if (file != null) {
+                myFiles.add(file);
+              }
               Navigator.pop(context);
             },
           ),
@@ -67,7 +82,10 @@ class ImageSeletor {
             ),
             title: Text("Из галереи"),
             onTap: () async {
-              file = await _pickImage(ImageSource.gallery);
+              var files = await _pickImagesFromGallery();
+              if (files != null) {
+                myFiles = List.of(files.map((e) => File(e.path)));
+              }
               Navigator.pop(context);
             },
           ),
@@ -75,6 +93,9 @@ class ImageSeletor {
         ],
       ),
     );
-    return file;
+    var multiImages = List<MultiImage>.of(
+      myFiles.map((e) => MultiImage(file: e)),
+    );
+    return multiImages;
   }
 }

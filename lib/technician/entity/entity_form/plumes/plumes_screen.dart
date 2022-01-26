@@ -146,29 +146,7 @@ class PlumesScreen extends StatelessWidget {
                                     ),
                                     SizedBox(height: 6),
                                     Text(
-                                      plumes[index].type,
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: Theme.of(context)
-                                            .textTheme
-                                            .bodyText1
-                                            ?.color,
-                                      ),
-                                    ),
-                                    SizedBox(height: 6),
-                                    Text(
                                       plumes[index].location,
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: Theme.of(context)
-                                            .textTheme
-                                            .bodyText1
-                                            ?.color,
-                                      ),
-                                    ),
-                                    SizedBox(height: 6),
-                                    Text(
-                                      plumes[index].description,
                                       style: TextStyle(
                                         fontSize: 14,
                                         color: Theme.of(context)

@@ -17,6 +17,7 @@ class SettingsRepository {
     var savedTheme = await storage.containsKey(key: _themeModeKey);
     if (!savedTheme) return ThemeMode.light;
     var themeName = await storage.read(key: _themeModeKey);
+    if (themeName == null) return ThemeMode.light;
     var theme = ThemeMode.values.firstWhere((e) => e.toString() == themeName);
     return theme;
   }

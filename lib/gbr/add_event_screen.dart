@@ -1,10 +1,8 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kupol_app/gbr/bottom_sheet_picker.dart';
-import 'package:kupol_app/shared/widgets/full_screen_view.dart';
-import 'package:kupol_app/shared/components/image_select_button.dart';
+import 'package:kupol_app/shared/components/multi_image_model.dart';
+import 'package:kupol_app/shared/widgets/attach_images_grid.dart';
 import 'package:kupol_app/constants.dart';
 
 class AddEventScreen extends StatelessWidget {
@@ -26,7 +24,7 @@ class AddEventScreen extends StatelessWidget {
   final _eventCategoryController = TextEditingController();
   final _eventAddressController = TextEditingController();
   final _eventDescController = TextEditingController();
-  final _imagesFiles = ValueNotifier<List<File?>>([]);
+  final _imagesFiles = ValueNotifier<List<MultiImage>>([]);
 
   bool _verifyAbilityToCreateAnEvent() {
     return _eventTitleController.text.isNotEmpty &&
@@ -46,6 +44,7 @@ class AddEventScreen extends StatelessWidget {
             onTap: () => Navigator.pop(context),
             child: Icon(
               Icons.close_rounded,
+              color: Colors.redAccent,
             ),
           ),
           actions: [
@@ -60,7 +59,7 @@ class AddEventScreen extends StatelessWidget {
                       Icons.check_rounded,
                       color: !canCreate
                           ? Theme.of(context).textTheme.bodyText2?.color
-                          : Theme.of(context).textTheme.bodyText1?.color,
+                          : Colors.green,
                     ),
                   ),
                 );
@@ -175,7 +174,6 @@ class AddEventScreen extends StatelessWidget {
                 style: TextStyle(
                   color: Theme.of(context).textTheme.bodyText1?.color,
                 ),
-                obscureText: true,
                 controller: _eventDescController,
                 decoration: const InputDecoration(
                   hintText: "Введите описание",
@@ -196,68 +194,7 @@ class AddEventScreen extends StatelessWidget {
                 style: TextStyle(fontSize: 14),
               ),
               SizedBox(height: 20),
-              ValueListenableBuilder<List<File?>>(
-                valueListenable: _imagesFiles,
-                builder: (context, files, child) {
-                  return GridView.count(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    crossAxisCount: 3,
-                    children: List.generate(
-                      files.length,
-                      (index) => Stack(
-                        alignment: Alignment.center,
-                        children: [
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => FullScreenView(
-                                    child: Image.file(
-                                      files[index]!,
-                                      fit: BoxFit.cover,
-                                    ),
-                                  ),
-                                ),
-                              );
-                            },
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(12.0),
-                              child: Image.file(
-                                files[index]!,
-                                width: 100,
-                                height: 100,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                          Positioned.fill(
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: GestureDetector(
-                                onTap: () {
-                                  var newfiles = files;
-                                  newfiles.removeAt(index);
-                                  _imagesFiles.value = List.of(newfiles);
-                                },
-                                child: SvgPicture.asset(
-                                  "lib/assets/icons/button_delete.svg",
-                                  width: 40,
-                                  height: 40,
-                                  fit: BoxFit.fill,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    )..add(ImageSelectButton(imagesFiles: _imagesFiles)),
-                  );
-                },
-              ),
+              AttachImagesGrid(imagesNotifier: _imagesFiles),
             ],
           ),
         ),

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:kupol_app/shared/widgets/full_screen_images_carousel.dart';
 import 'package:kupol_app/shared/widgets/full_screen_view.dart';
 import 'package:kupol_app/shared/widgets/image_selector.dart';
 import 'package:kupol_app/constants.dart';
-import 'package:kupol_app/technician/entity/components/editable_image_model.dart';
+import 'package:kupol_app/shared/components/multi_image_model.dart';
 import 'package:kupol_app/technician/entity/components/entity_model.dart';
 import 'package:kupol_app/technician/entity/entity_form/entity_form_sreen.dart';
 import 'package:kupol_app/theme.dart';
@@ -13,21 +14,21 @@ class EntityDetailsScreen extends StatelessWidget {
 
   final Entity entity;
   final _editableNotifier = ValueNotifier<bool>(false);
-  final _imagesFiles = ValueNotifier<List<EditableImage>>([]);
-  final _formFrontSidePhoto = ValueNotifier<EditableImage?>(null);
-  final _formBackSidePhoto = ValueNotifier<EditableImage?>(null);
+  final _imagesFiles = ValueNotifier<List<MultiImage>>([]);
+  final _formFrontSidePhoto = ValueNotifier<MultiImage?>(null);
+  final _formBackSidePhoto = ValueNotifier<MultiImage?>(null);
 
   @override
   Widget build(BuildContext context) {
     _imagesFiles.value = List.of(
-      entity.images.map((e) => EditableImage(path: e)),
+      entity.images.map((e) => MultiImage(path: e)),
     );
 
     if (entity.photo.asMap().containsKey(0))
-      _formFrontSidePhoto.value = EditableImage(path: entity.photo[0]);
+      _formFrontSidePhoto.value = MultiImage(path: entity.photo[0]);
 
     if (entity.photo.asMap().containsKey(1))
-      _formFrontSidePhoto.value = EditableImage(path: entity.photo[1]);
+      _formFrontSidePhoto.value = MultiImage(path: entity.photo[1]);
 
     return ValueListenableBuilder<bool>(
       valueListenable: _editableNotifier,
@@ -177,7 +178,7 @@ class EntityDetailsScreen extends StatelessWidget {
                         ],
                       ),
                       SizedBox(height: 20),
-                      ValueListenableBuilder<List<EditableImage>>(
+                      ValueListenableBuilder<List<MultiImage>>(
                         valueListenable: _imagesFiles,
                         builder: (context, images, child) {
                           return GridView.count(
@@ -196,16 +197,9 @@ class EntityDetailsScreen extends StatelessWidget {
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(builder: (context) {
-                                          return FullScreenView(
-                                            child: images[index].path == null
-                                                ? Image.file(
-                                                    images[index].file!,
-                                                    fit: BoxFit.fitWidth,
-                                                  )
-                                                : Image.asset(
-                                                    images[index].path!,
-                                                    fit: BoxFit.fitWidth,
-                                                  ),
+                                          return FullScreenImagesCarousel(
+                                            currentIndex: index,
+                                            images: images,
                                           );
                                         }),
                                       );
@@ -256,16 +250,9 @@ class EntityDetailsScreen extends StatelessWidget {
                                   visible: isEditable,
                                   child: GestureDetector(
                                     onTap: () async {
-                                      var file =
+                                      var pickFiles =
                                           await ImageSeletor().select(context);
-
-                                      // Может быть null, если нажали "добавить",
-                                      // вышло меню с выбором, а ничего выбрано и добавлено не было
-                                      if (file != null) {
-                                        var newImages = _imagesFiles.value;
-                                        _imagesFiles.value = List.of(newImages)
-                                          ..add(EditableImage(file: file));
-                                      }
+                                      _imagesFiles.value += List.of(pickFiles);
                                     },
                                     child: SvgPicture.asset(
                                       "lib/assets/icons/img_add.svg",
@@ -280,20 +267,20 @@ class EntityDetailsScreen extends StatelessWidget {
                       ),
                       SizedBox(height: 30),
                       Text(
-                        "ФОТОГРАФИИ",
+                        "ФОТОГРАФИИ АНКЕТЫ",
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                         ),
                       ),
                       SizedBox(height: 6),
                       Text(
-                        "Присоедините не более 5 фото",
+                        "Присоедините лицевую и обратную сторону анкеты",
                         style: TextStyle(fontSize: 14),
                       ),
                       SizedBox(height: 20),
                       Row(
                         children: [
-                          ValueListenableBuilder<EditableImage?>(
+                          ValueListenableBuilder<MultiImage?>(
                             valueListenable: _formFrontSidePhoto,
                             builder: (context, photo, child) {
                               return Column(
@@ -301,14 +288,14 @@ class EntityDetailsScreen extends StatelessWidget {
                                   if (photo == null)
                                     GestureDetector(
                                       onTap: () async {
-                                        var file = await ImageSeletor()
+                                        var images = await ImageSeletor()
                                             .select(context);
 
                                         // Может быть null, если нажали "добавить",
                                         // вышло меню с выбором, а ничего выбрано и добавлено не было
-                                        if (file != null) {
+                                        if (images.length > 0) {
                                           _formFrontSidePhoto.value =
-                                              EditableImage(file: file);
+                                              images.first;
                                         }
                                       },
                                       child: SvgPicture.asset(
@@ -400,7 +387,7 @@ class EntityDetailsScreen extends StatelessWidget {
                             },
                           ),
                           SizedBox(width: 20),
-                          ValueListenableBuilder<EditableImage?>(
+                          ValueListenableBuilder<MultiImage?>(
                             valueListenable: _formBackSidePhoto,
                             builder: (context, photo, child) {
                               return Column(
@@ -408,14 +395,14 @@ class EntityDetailsScreen extends StatelessWidget {
                                   if (photo == null)
                                     GestureDetector(
                                       onTap: () async {
-                                        var file = await ImageSeletor()
+                                        var images = await ImageSeletor()
                                             .select(context);
 
                                         // Может быть null, если нажали "добавить",
                                         // вышло меню с выбором, а ничего выбрано и добавлено не было
-                                        if (file != null) {
+                                        if (images.length > 0) {
                                           _formBackSidePhoto.value =
-                                              EditableImage(file: file);
+                                              images.first;
                                         }
                                       },
                                       child: SvgPicture.asset(

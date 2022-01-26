@@ -7,9 +7,7 @@ Future<void> showCreateSectionBottomSheet({
   required BuildContext context,
 }) async {
   var nameController = TextEditingController();
-  var descController = TextEditingController();
   var locationController = TextEditingController();
-  var typeController = TextEditingController();
   await showModalBottomSheet(
     context: context,
     isScrollControlled: true,
@@ -78,29 +76,6 @@ Future<void> showCreateSectionBottomSheet({
                       color: Theme.of(context).textTheme.bodyText1?.color,
                       fontWeight: FontWeight.w600,
                     ),
-                    controller: descController,
-                    keyboardType: TextInputType.name,
-                    decoration: InputDecoration(
-                      labelText: "Описание",
-                      labelStyle: TextStyle(
-                        fontSize: 18,
-                        color: Theme.of(context).textTheme.bodyText2?.color,
-                        fontWeight: FontWeight.w400,
-                      ),
-                      hintStyle: TextStyle(
-                        fontSize: 18,
-                        color: Theme.of(context).textTheme.bodyText2?.color,
-                      ),
-                      floatingLabelBehavior: FloatingLabelBehavior.always,
-                    ),
-                  ),
-                  SizedBox(height: 10),
-                  TextFormField(
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Theme.of(context).textTheme.bodyText1?.color,
-                      fontWeight: FontWeight.w600,
-                    ),
                     controller: locationController,
                     keyboardType: TextInputType.name,
                     decoration: InputDecoration(
@@ -117,64 +92,45 @@ Future<void> showCreateSectionBottomSheet({
                       floatingLabelBehavior: FloatingLabelBehavior.always,
                     ),
                   ),
-                  SizedBox(height: 10),
-                  TextFormField(
-                    style: TextStyle(
-                      fontSize: 18,
-                      color: Theme.of(context).textTheme.bodyText1?.color,
-                      fontWeight: FontWeight.w600,
-                    ),
-                    controller: typeController,
-                    keyboardType: TextInputType.name,
-                    decoration: InputDecoration(
-                      labelText: "Тип",
-                      labelStyle: TextStyle(
-                        fontSize: 18,
-                        color: Theme.of(context).textTheme.bodyText2?.color,
-                        fontWeight: FontWeight.w400,
-                      ),
-                      hintStyle: TextStyle(
-                        fontSize: 18,
-                        color: Theme.of(context).textTheme.bodyText2?.color,
-                      ),
-                      floatingLabelBehavior: FloatingLabelBehavior.always,
-                    ),
-                  ),
                   SizedBox(height: 30),
                   Padding(
                     padding: EdgeInsets.only(
-                      bottom: MediaQuery.of(context).viewInsets.bottom / 1.5,
+                      bottom: MediaQuery.of(context).viewInsets.bottom /
+                          kBottomKeyboardPaddingCoef,
                     ),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        TextButton(
-                          onPressed: () => Navigator.of(context).pop(),
-                          style: ButtonStyle(
-                            fixedSize: MaterialStateProperty.all<Size>(
-                              Size(
-                                MediaQuery.of(context).size.width * 0.425,
-                                50.0,
-                              ),
-                            ),
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                side: BorderSide(
-                                  color: secondaryColor,
-                                  width: 2.0,
+                        SizedBox(
+                          height: 50,
+                          child: TextButton(
+                            onPressed: () => Navigator.of(context).pop(),
+                            style: ButtonStyle(
+                              fixedSize: MaterialStateProperty.all<Size>(
+                                Size(
+                                  MediaQuery.of(context).size.width * 0.425,
+                                  50.0,
                                 ),
-                                borderRadius: BorderRadius.circular(12.0),
+                              ),
+                              shape: MaterialStateProperty.all<
+                                  RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                  side: BorderSide(
+                                    color: secondaryColor,
+                                    width: 2.0,
+                                  ),
+                                  borderRadius: BorderRadius.circular(12.0),
+                                ),
                               ),
                             ),
-                          ),
-                          child: Text(
-                            "Отмена",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: secondaryColor,
-                              fontWeight: FontWeight.w600,
+                            child: Text(
+                              "Отмена",
+                              style: TextStyle(
+                                fontSize: 16,
+                                color: secondaryColor,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ),
                         ),

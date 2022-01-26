@@ -98,7 +98,7 @@ class LoginScreen extends StatelessWidget {
             children: [
               Image.asset(
                 "lib/assets/logo.png",
-                height: 200,
+                height: 160,
               ),
               SizedBox(height: 24),
               TextFormField(

@@ -1,11 +1,11 @@
-import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:kupol_app/shared/components/image_select_button.dart';
 import 'package:kupol_app/constants.dart';
+import 'package:kupol_app/shared/components/multi_image_model.dart';
 import 'package:kupol_app/shared/models/event_model.dart';
+import 'package:kupol_app/shared/widgets/attach_images_grid.dart';
 import 'package:kupol_app/theme.dart';
 
 void sendMessage({
@@ -69,7 +69,7 @@ Future<void> showSendMessageBottomSheet({
   required Event event,
 }) async {
   final _messageController = TextEditingController();
-  final _imagesFiles = ValueNotifier<List<File?>>([]);
+  final _imagesFiles = ValueNotifier<List<MultiImage>>([]);
   final random = Random().nextInt(5);
   await showModalBottomSheet(
     context: context,
@@ -86,110 +86,72 @@ Future<void> showSendMessageBottomSheet({
         onTap: () => catchFocus(context),
         child: Padding(
           padding: kDetailScreenPadding,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(height: 12),
-              Center(
-                child: SvgPicture.asset(
-                  "lib/assets/icons/drop_down.svg",
-                ),
-              ),
-              SizedBox(height: 12),
-              TextFormField(
-                controller: _messageController,
-                decoration: InputDecoration(
-                  hintText: "Введите текст сообщения",
-                  labelText: "Сообщение для оператора",
-                  labelStyle: TextStyle(
-                    fontSize: 20,
-                    color: Theme.of(context).textTheme.bodyText2?.color,
+          child: Padding(
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom / 1.75,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 12),
+                Center(
+                  child: SvgPicture.asset(
+                    "lib/assets/icons/drop_down.svg",
                   ),
-                  floatingLabelBehavior: FloatingLabelBehavior.always,
                 ),
-              ),
-              SizedBox(height: 30),
-              Text(
-                "ФОТОГРАФИИ",
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
+                SizedBox(height: 12),
+                TextFormField(
+                  controller: _messageController,
+                  decoration: InputDecoration(
+                    hintText: "Введите текст сообщения",
+                    labelText: "Сообщение для оператора",
+                    labelStyle: TextStyle(
+                      fontSize: 20,
+                      color: Theme.of(context).textTheme.bodyText2?.color,
+                    ),
+                    floatingLabelBehavior: FloatingLabelBehavior.always,
+                  ),
                 ),
-              ),
-              SizedBox(height: 6),
-              Text(
-                "Присоедините не более 5 фото",
-                style: TextStyle(fontSize: 14),
-              ),
-              SizedBox(height: 30),
-              ValueListenableBuilder<List<File?>>(
-                valueListenable: _imagesFiles,
-                builder: (context, files, child) {
-                  return GridView.count(
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    crossAxisCount: 3,
-                    children: List.generate(
-                      files.length,
-                      (index) => Stack(
-                        clipBehavior: Clip.none,
-                        children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(12.0),
-                            child: Image.file(
-                              files[index]!,
-                              width: 100,
-                              height: 100,
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          Positioned.fill(
-                            child: Align(
-                              alignment: Alignment.center,
-                              child: GestureDetector(
-                                onTap: () {
-                                  var newfiles = files;
-                                  newfiles.removeAt(index);
-                                  _imagesFiles.value = List.of(newfiles);
-                                },
-                                child: SvgPicture.asset(
-                                  "lib/assets/icons/button_delete.svg",
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
+                SizedBox(height: 30),
+                Text(
+                  "ФОТОГРАФИИ",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                SizedBox(height: 6),
+                Text(
+                  "Присоедините не более 5 фото",
+                  style: TextStyle(fontSize: 14),
+                ),
+                SizedBox(height: 30),
+                AttachImagesGrid(imagesNotifier: _imagesFiles),
+                SizedBox(height: 30),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  height: 50,
+                  child: TextButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      sendMessage(
+                        context: context,
+                        isSuccess: random >= 1,
+                      );
+                    },
+                    style: kNotPrimaryButtonTheme,
+                    child: Text(
+                      "Отправить сообщение",
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: secondaryColor,
+                        fontWeight: FontWeight.w600,
                       ),
-                    )..add(ImageSelectButton(imagesFiles: _imagesFiles)),
-                  );
-                },
-              ),
-              SizedBox(height: 30),
-              SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: 50,
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                    sendMessage(
-                      context: context,
-                      isSuccess: random >= 1,
-                    );
-                  },
-                  style: kNotPrimaryButtonTheme,
-                  child: Text(
-                    "Отправить сообщение",
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: secondaryColor,
-                      fontWeight: FontWeight.w600,
                     ),
                   ),
                 ),
-              ),
-              SizedBox(height: 16),
-            ],
+                SizedBox(height: 16),
+              ],
+            ),
           ),
         ),
       ),

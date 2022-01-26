@@ -87,7 +87,7 @@ class GbrScreen extends StatelessWidget {
                 ),
               ),
               TextSpan(
-                text: " (10-16 декабря)",
+                text: " (11-16 декабря)",
                 style: TextStyle(
                   fontSize: 18,
                   color: Theme.of(context).textTheme.bodyText1?.color,

@@ -1,10 +1,10 @@
 import 'dart:io';
 
-class EditableImage {
+class MultiImage {
   final String? path;
   final File? file;
 
-  EditableImage({
+  MultiImage({
     this.path,
     this.file,
   });

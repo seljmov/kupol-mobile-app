@@ -15,41 +15,43 @@ class BottomSheetPicker {
           topRight: Radius.circular(20),
         ),
       ),
-      builder: (context) => Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          SizedBox(height: 12),
-          Center(
-            child: SvgPicture.asset(
-              "lib/assets/icons/drop_down.svg",
-            ),
-          ),
-          SizedBox(height: 12),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Text(
-              "Выберите событие",
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.w400,
+      builder: (context) => SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            SizedBox(height: 12),
+            Center(
+              child: SvgPicture.asset(
+                "lib/assets/icons/drop_down.svg",
               ),
             ),
-          ),
-          ...List.generate(
-            items.length,
-            (index) {
-              return ListTile(
-                title: Text(items[index]),
-                onTap: () async {
-                  onTapItem(items[index]);
-                  Navigator.pop(context);
-                },
-              );
-            },
-          ),
-          SizedBox(height: 24),
-        ],
+            SizedBox(height: 12),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                "Выберите событие",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+            ),
+            ...List.generate(
+              items.length,
+              (index) {
+                return ListTile(
+                  title: Text(items[index]),
+                  onTap: () async {
+                    onTapItem(items[index]);
+                    Navigator.pop(context);
+                  },
+                );
+              },
+            ),
+            SizedBox(height: 24),
+          ],
+        ),
       ),
     );
   }
