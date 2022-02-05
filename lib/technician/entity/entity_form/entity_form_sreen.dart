@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:kupol_app/technician/entity/entity_form/plumes/create_plume_bottom_sheet.dart';
+import 'package:kupol_app/technician/entity/entity_form/plumes/plume_details_screen.dart';
 import 'package:kupol_app/technician/entity/entity_form/plumes/plumes_screen.dart';
-import 'package:kupol_app/technician/entity/entity_form/sections/create_section_bottom_sheet.dart';
+import 'package:kupol_app/technician/entity/entity_form/sections/section_details_screen.dart';
 import 'package:kupol_app/technician/entity/entity_form/sections/sections_screen.dart';
-import 'package:kupol_app/technician/entity/entity_form/users/create_user_bottom_sheet.dart';
+import 'package:kupol_app/technician/entity/entity_form/users/user_details_screen.dart';
 import 'package:kupol_app/technician/entity/entity_form/users/users_screen.dart';
 
 class PageIndex {
@@ -20,13 +20,25 @@ class EntityFormScreen extends StatelessWidget {
   Future<void> _getCreateFunction(BuildContext context) async {
     var index = _activeTabNotifier.value;
     if (index == PageIndex.UsersPage) {
-      await showCreateUserBottomSheet(context: context);
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => UserDetailsScreen(),
+        ),
+      );
     }
     if (index == PageIndex.SectionsPage) {
-      await showCreateSectionBottomSheet(context: context);
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => SectionDetailsScreen(),
+        ),
+      );
     }
     if (index == PageIndex.PlumsPage) {
-      await showCreatePlumeBottomSheet(context: context);
+      Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => PlumeDetailsScreen(),
+        ),
+      );
     }
 
     return null;

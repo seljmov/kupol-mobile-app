@@ -89,8 +89,8 @@ var lightThemeData = new ThemeData(
     ),
   ).apply(fontFamily: "OpenSans"),
   textSelectionTheme: TextSelectionThemeData(
-    selectionColor: secondaryColor,
-  ),
+      //selectionColor: secondaryColor,
+      ),
   appBarTheme: AppBarTheme(
     systemOverlayStyle: SystemUiOverlayStyle.dark,
     backgroundColor: Colors.white,
@@ -168,8 +168,8 @@ var darkThemeData = ThemeData(
     ),
   ).apply(fontFamily: "OpenSans"),
   textSelectionTheme: TextSelectionThemeData(
-    selectionColor: secondaryColor,
-  ),
+      //selectionColor: secondaryColor,
+      ),
   appBarTheme: AppBarTheme(
     systemOverlayStyle: SystemUiOverlayStyle.light,
     backgroundColor: darkColor,

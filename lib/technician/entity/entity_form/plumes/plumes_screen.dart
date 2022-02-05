@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kupol_app/technician/entity/entity_form/plumes/components/plume_model.dart';
-import 'package:kupol_app/technician/entity/entity_form/plumes/edit_plume_bottom_sheet.dart';
+import 'package:kupol_app/technician/entity/entity_form/plumes/plume_details_screen.dart';
 import 'package:kupol_app/technician/entity/entity_form/repositories/entity_form_repository.dart';
 
 class PlumesScreen extends StatelessWidget {
@@ -47,9 +47,12 @@ class PlumesScreen extends StatelessWidget {
                   ),
                   onTap: () async {
                     Navigator.pop(context);
-                    await showEditPlumeBottomSheet(
-                      context: context,
-                      plume: plume,
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => PlumeDetailsScreen(
+                          plume: plume,
+                        ),
+                      ),
                     );
                   },
                 ),

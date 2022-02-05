@@ -3,7 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kupol_app/constants.dart';
 import 'package:kupol_app/security/widgets/event_log.dart';
 import 'package:kupol_app/shared/widgets/event_technical_details_card.dart';
-import 'package:kupol_app/security/widgets/send_message_bottom_sheet.dart';
+import 'package:kupol_app/shared/widgets/send_message_bottom_sheet.dart';
 import 'package:kupol_app/shared/models/event_model.dart';
 import 'package:kupol_app/shared/models/event_status.dart';
 import 'package:kupol_app/shared/widgets/event_status_card.dart';
@@ -105,7 +105,6 @@ class EventDetailScreen extends StatelessWidget {
                             onPressed: () async {
                               await showSendMessageBottomSheet(
                                 context: context,
-                                event: event,
                               );
                             },
                             style: kNotPrimaryButtonTheme,

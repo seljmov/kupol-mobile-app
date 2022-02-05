@@ -22,7 +22,7 @@ class EventTechnicalDetailsCard extends StatelessWidget {
           text: TextSpan(
             children: [
               TextSpan(
-                text: "Локация: ",
+                text: "Жилой комплекс: ",
                 style: TextStyle(
                   fontSize: 14,
                   color: Theme.of(context).textTheme.bodyText2?.color,

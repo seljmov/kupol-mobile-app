@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kupol_app/technician/entity/entity_form/repositories/entity_form_repository.dart';
 import 'package:kupol_app/technician/entity/entity_form/sections/components/section_model.dart';
-import 'package:kupol_app/technician/entity/entity_form/sections/edit_section_bottom_sheet.dart';
+import 'package:kupol_app/technician/entity/entity_form/sections/section_details_screen.dart';
 
 class SectionsScreen extends StatelessWidget {
   const SectionsScreen({Key? key}) : super(key: key);
@@ -47,9 +47,12 @@ class SectionsScreen extends StatelessWidget {
                   ),
                   onTap: () async {
                     Navigator.pop(context);
-                    await showEditSectionBottomSheet(
-                      context: context,
-                      section: section,
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) => SectionDetailsScreen(
+                          section: section,
+                        ),
+                      ),
                     );
                   },
                 ),

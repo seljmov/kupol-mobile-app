@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kupol_app/constants.dart';
+import 'package:kupol_app/shared/widgets/send_message_bottom_sheet.dart';
 import 'package:kupol_app/technician/requests/components/request_model.dart';
 import 'package:kupol_app/technician/requests/request_technical_details_card.dart';
 
@@ -78,7 +79,11 @@ class RequestDetailScreen extends StatelessWidget {
             child: Column(
               children: [
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    await showSendMessageBottomSheet(
+                      context: context,
+                    );
+                  },
                   child: Text("Обработать"),
                 ),
                 SizedBox(height: 16),

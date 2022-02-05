@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kupol_app/technician/entity/entity_form/repositories/entity_form_repository.dart';
 import 'package:kupol_app/technician/entity/entity_form/users/components/user_model.dart';
-import 'package:kupol_app/technician/entity/entity_form/users/edit_user_bottom_sheet.dart';
+import 'package:kupol_app/technician/entity/entity_form/users/user_details_screen.dart';
 import 'package:kupol_app/theme.dart';
 
 class UsersScreen extends StatelessWidget {
@@ -51,9 +51,12 @@ class UsersScreen extends StatelessWidget {
                     ),
                     onTap: () async {
                       Navigator.pop(context);
-                      await showEditUserBottomSheet(
-                        context: context,
-                        user: user,
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => UserDetailsScreen(
+                            user: user,
+                          ),
+                        ),
                       );
                     },
                   ),
