@@ -12,36 +12,21 @@ class PageIndex {
   static const int PlumsPage = 2;
 }
 
-class EntityFormScreen extends StatelessWidget {
+class EntityFormScreen extends StatefulWidget {
   EntityFormScreen({Key? key}) : super(key: key);
 
-  final _activeTabNotifier = ValueNotifier<int>(0);
+  @override
+  State<EntityFormScreen> createState() => _EntityFormScreenState();
+}
 
-  Future<void> _getCreateFunction(BuildContext context) async {
-    var index = _activeTabNotifier.value;
-    if (index == PageIndex.UsersPage) {
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => UserDetailsScreen(),
-        ),
-      );
-    }
-    if (index == PageIndex.SectionsPage) {
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => SectionDetailsScreen(),
-        ),
-      );
-    }
-    if (index == PageIndex.PlumsPage) {
-      Navigator.of(context).push(
-        MaterialPageRoute(
-          builder: (context) => PlumeDetailsScreen(),
-        ),
-      );
-    }
+class _EntityFormScreenState extends State<EntityFormScreen>
+    with SingleTickerProviderStateMixin {
+  late TabController _tabController;
 
-    return null;
+  @override
+  void initState() {
+    _tabController = TabController(initialIndex: 0, length: 3, vsync: this);
+    super.initState();
   }
 
   @override
@@ -58,15 +43,13 @@ class EntityFormScreen extends StatelessWidget {
             icon: Icon(Icons.arrow_back_ios_new_rounded),
           ),
           bottom: TabBar(
+            controller: _tabController,
             labelPadding: EdgeInsets.zero,
             tabs: [
               Tab(text: "Пользователи"),
               Tab(text: "Разделы"),
               Tab(text: "Шлейфы"),
             ],
-            onTap: (index) {
-              _activeTabNotifier.value = index;
-            },
           ),
         ),
         body: Padding(
@@ -75,6 +58,7 @@ class EntityFormScreen extends StatelessWidget {
             horizontal: 12,
           ),
           child: TabBarView(
+            controller: _tabController,
             children: [
               UsersScreen(),
               SectionsScreen(),
@@ -82,20 +66,30 @@ class EntityFormScreen extends StatelessWidget {
             ],
           ),
         ),
-        floatingActionButton: ValueListenableBuilder(
-          valueListenable: _activeTabNotifier,
-          builder: (context, value, child) {
-            return FloatingActionButton(
-              onPressed: () async => await _getCreateFunction(context),
-              backgroundColor: Theme.of(context).secondaryHeaderColor,
-              foregroundColor: Colors.white,
-              elevation: 2,
-              child: Icon(
-                Icons.add_rounded,
-                size: 40,
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            var index = _tabController.index;
+            Widget detailsScreen = UserDetailsScreen();
+            if (index == PageIndex.UsersPage)
+              detailsScreen = UserDetailsScreen();
+            if (index == PageIndex.SectionsPage)
+              detailsScreen = SectionDetailsScreen();
+            if (index == PageIndex.PlumsPage)
+              detailsScreen = PlumeDetailsScreen();
+
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => detailsScreen,
               ),
             );
           },
+          backgroundColor: Theme.of(context).secondaryHeaderColor,
+          foregroundColor: Colors.white,
+          elevation: 2,
+          child: Icon(
+            Icons.add_rounded,
+            size: 40,
+          ),
         ),
       ),
     );

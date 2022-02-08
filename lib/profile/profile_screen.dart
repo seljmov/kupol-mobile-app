@@ -77,7 +77,7 @@ class ProfileScreen extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     Text(
-                      "Ваше данные успешно обновлены",
+                      "Ваши данные успешно обновлены",
                       style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
@@ -109,36 +109,40 @@ class ProfileScreen extends StatelessWidget {
             resizeToAvoidBottomInset: false,
             appBar: AppBar(
               title: Text("Профиль"),
-              leading: isEditable
-                  ? GestureDetector(
-                      onTap: () {
-                        _editableNotifier.value = false;
-                      },
-                      child: Icon(
-                        Icons.close_rounded,
-                        color: Colors.redAccent,
-                      ),
-                    )
-                  : GestureDetector(
-                      onTap: () => Navigator.pop(context),
-                      child: Icon(Icons.arrow_back_ios_new_rounded),
-                    ),
+              leading: Visibility(
+                visible: isEditable,
+                child: IconButton(
+                  onPressed: () {
+                    _editableNotifier.value = false;
+                  },
+                  icon: Icon(
+                    Icons.close_rounded,
+                    color: Colors.redAccent,
+                  ),
+                ),
+                replacement: GestureDetector(
+                  onTap: () => Navigator.pop(context),
+                  child: Icon(Icons.arrow_back_ios_new_rounded),
+                ),
+              ),
               actions: [
-                if (isEditable)
-                  Padding(
+                Visibility(
+                  visible: isEditable,
+                  child: Padding(
                     padding: const EdgeInsets.only(right: 20),
-                    child: GestureDetector(
-                      onTap: () async {
+                    child: IconButton(
+                      onPressed: () async {
                         var phone = phoneController.text;
                         await _updateInfo(context, employee, phone);
                         _editableNotifier.value = false;
                       },
-                      child: Icon(
+                      icon: Icon(
                         Icons.check_rounded,
                         color: Colors.green,
                       ),
                     ),
                   ),
+                ),
               ],
             ),
             body: Padding(
@@ -190,8 +194,11 @@ class ProfileScreen extends StatelessWidget {
                                     bottom: 0,
                                     child: GestureDetector(
                                       onTap: () async {
-                                        var images = await ImageSeletor()
-                                            .select(context);
+                                        var images =
+                                            await ImageSeletor().select(
+                                          context: context,
+                                          multiFormGallery: false,
+                                        );
                                         if (images.length > 0) {
                                           _profileImageNotifier.value =
                                               images.first.file;
@@ -264,17 +271,18 @@ class ProfileScreen extends StatelessWidget {
                             color: Theme.of(context).textTheme.bodyText1?.color,
                           ),
                           floatingLabelBehavior: FloatingLabelBehavior.always,
-                          suffixIcon: !isEditable
-                              ? IconButton(
-                                  onPressed: () {
-                                    _editableNotifier.value = true;
-                                  },
-                                  icon: SvgPicture.asset(
-                                    "lib/assets/icons/pen2.svg",
-                                    width: 18,
-                                  ),
-                                )
-                              : Text(""),
+                          suffixIcon: Visibility(
+                            visible: !isEditable,
+                            child: IconButton(
+                              onPressed: () {
+                                _editableNotifier.value = true;
+                              },
+                              icon: SvgPicture.asset(
+                                "lib/assets/icons/pen2.svg",
+                                width: 18,
+                              ),
+                            ),
+                          ),
                         ),
                       ),
                       SizedBox(height: 30),
@@ -325,52 +333,9 @@ class ProfileScreen extends StatelessWidget {
                             context: context,
                             dialogType: DialogType.NO_HEADER,
                             headerAnimationLoop: false,
-                            customHeader: Padding(
-                              padding: const EdgeInsets.all(4.0),
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  color: secondaryColor,
-                                ),
-                                child: Center(
-                                  child: Icon(
-                                    Icons.door_back_door_outlined,
-                                    size: 48,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ),
                             title: "Выход из приложения",
                             desc: "Вы точно ходите выйти из приложения?",
                             btnCancel: SizedBox(
-                              height: 40,
-                              child: ElevatedButton(
-                                onPressed: () => Navigator.pop(context),
-                                child: Text("Отмена"),
-                                style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                    Colors.grey,
-                                  ),
-                                  foregroundColor:
-                                      MaterialStateProperty.all<Color>(
-                                    Colors.white,
-                                  ),
-                                  shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                      side: BorderSide(
-                                        color: Colors.grey,
-                                        width: 2.0,
-                                      ),
-                                      borderRadius: BorderRadius.circular(12.0),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                            btnOk: SizedBox(
                               height: 40,
                               child: ElevatedButton(
                                 onPressed: () async {
@@ -391,6 +356,33 @@ class ProfileScreen extends StatelessWidget {
                                     RoundedRectangleBorder(
                                       side: BorderSide(
                                         color: Colors.redAccent,
+                                        width: 2.0,
+                                      ),
+                                      borderRadius: BorderRadius.circular(12.0),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            btnOk: SizedBox(
+                              height: 40,
+                              child: ElevatedButton(
+                                onPressed: () => Navigator.pop(context),
+                                child: Text("Отмена"),
+                                style: ButtonStyle(
+                                  backgroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                    Colors.grey,
+                                  ),
+                                  foregroundColor:
+                                      MaterialStateProperty.all<Color>(
+                                    Colors.white,
+                                  ),
+                                  shape: MaterialStateProperty.all<
+                                      RoundedRectangleBorder>(
+                                    RoundedRectangleBorder(
+                                      side: BorderSide(
+                                        color: Colors.grey,
                                         width: 2.0,
                                       ),
                                       borderRadius: BorderRadius.circular(12.0),

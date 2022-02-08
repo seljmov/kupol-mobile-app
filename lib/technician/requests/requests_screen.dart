@@ -30,7 +30,7 @@ class RequestsScreen extends StatelessWidget {
         if (requests.isEmpty) return EmptyRequestsScreen();
         return SingleChildScrollView(
           padding: kEventsScreenPadding,
-          physics: ClampingScrollPhysics(),
+          physics: kDefaultPhysics,
           child: Column(
             children: List.generate(requests.length, (index) {
               return Padding(

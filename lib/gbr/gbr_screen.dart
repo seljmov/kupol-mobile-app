@@ -138,7 +138,7 @@ class GbrScreen extends StatelessWidget {
           var events = snapshot.data!;
           return SingleChildScrollView(
             padding: kEventsScreenPadding,
-            physics: ClampingScrollPhysics(),
+            physics: kDefaultPhysics,
             child: Column(
               children: _configureEventsList(
                 context: context,

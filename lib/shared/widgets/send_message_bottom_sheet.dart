@@ -79,7 +79,7 @@ Future<void> showSendMessageBottomSheet({
       ),
     ),
     builder: (context) => SingleChildScrollView(
-      physics: ClampingScrollPhysics(),
+      physics: kDefaultPhysics,
       child: GestureDetector(
         onTap: () => catchFocus(context),
         child: Padding(

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:kupol_app/constants.dart';
 import 'package:kupol_app/technician/entity/entity_form/repositories/entity_form_repository.dart';
 import 'package:kupol_app/technician/entity/entity_form/sections/components/section_model.dart';
 import 'package:kupol_app/technician/entity/entity_form/sections/section_details_screen.dart';
@@ -98,7 +99,7 @@ class SectionsScreen extends StatelessWidget {
 
         var sections = snapshot.data!;
         return SingleChildScrollView(
-          physics: ClampingScrollPhysics(),
+          physics: kDefaultPhysics,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -121,7 +122,7 @@ class SectionsScreen extends StatelessWidget {
                             mainAxisSize: MainAxisSize.max,
                             children: [
                               Text(
-                                "${index + 1}",
+                                sections[index].id.toString(),
                                 style: TextStyle(
                                   fontSize: 16,
                                   color: Theme.of(context)
@@ -136,18 +137,6 @@ class SectionsScreen extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      sections[index].name,
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        color: Theme.of(context)
-                                            .textTheme
-                                            .bodyText1
-                                            ?.color,
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                    SizedBox(height: 6),
                                     Text(
                                       sections[index].location,
                                       style: TextStyle(

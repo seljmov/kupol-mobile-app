@@ -3,6 +3,7 @@ import 'package:kupol_app/shared/models/event_status.dart';
 
 /// value -> "error:"
 final errorPattern = "error:";
+final kDefaultPhysics = BouncingScrollPhysics();
 
 final kEventNewStatusColor = Color(0xFF3CB047);
 final kEventOnVerificationStatusColor = Color(0xFFE94235);

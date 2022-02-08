@@ -12,13 +12,13 @@ class SectionDetailsScreen extends StatefulWidget {
 }
 
 class _SectionDetailsScreenState extends State<SectionDetailsScreen> {
-  var nameController = TextEditingController();
+  var idController = TextEditingController();
   var locationController = TextEditingController();
 
   @override
   void initState() {
     if (widget.section != null) {
-      nameController.text = widget.section!.name;
+      idController.text = widget.section!.id.toString();
       locationController.text = widget.section!.location;
     }
     super.initState();
@@ -29,7 +29,6 @@ class _SectionDetailsScreenState extends State<SectionDetailsScreen> {
     return GestureDetector(
       onTap: () => catchFocus(context),
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text(
             widget.section == null ? "Добавить раздел" : "Изменить раздел",
@@ -42,7 +41,7 @@ class _SectionDetailsScreenState extends State<SectionDetailsScreen> {
         ),
         body: SingleChildScrollView(
           padding: kDetailScreenPadding,
-          physics: ClampingScrollPhysics(),
+          physics: kDefaultPhysics,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -53,10 +52,10 @@ class _SectionDetailsScreenState extends State<SectionDetailsScreen> {
                   color: Theme.of(context).textTheme.bodyText1?.color,
                   fontWeight: FontWeight.w600,
                 ),
-                controller: nameController,
+                controller: idController,
                 keyboardType: TextInputType.name,
                 decoration: InputDecoration(
-                  labelText: "Название",
+                  labelText: "Идентификатор",
                   labelStyle: TextStyle(
                     fontSize: 18,
                     color: Theme.of(context).textTheme.bodyText2?.color,

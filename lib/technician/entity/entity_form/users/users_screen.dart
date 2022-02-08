@@ -1,6 +1,7 @@
 import 'package:extended_masked_text/extended_masked_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:kupol_app/constants.dart';
 import 'package:kupol_app/technician/entity/entity_form/repositories/entity_form_repository.dart';
 import 'package:kupol_app/technician/entity/entity_form/users/components/user_model.dart';
 import 'package:kupol_app/technician/entity/entity_form/users/user_details_screen.dart';
@@ -22,7 +23,7 @@ class UsersScreen extends StatelessWidget {
         ),
       ),
       builder: (BuildContext context) => SingleChildScrollView(
-        physics: ClampingScrollPhysics(),
+        physics: kDefaultPhysics,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -103,7 +104,7 @@ class UsersScreen extends StatelessWidget {
 
         var users = snapshot.data!;
         return SingleChildScrollView(
-          physics: ClampingScrollPhysics(),
+          physics: kDefaultPhysics,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.start,

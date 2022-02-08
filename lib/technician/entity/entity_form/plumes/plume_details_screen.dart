@@ -12,13 +12,13 @@ class PlumeDetailsScreen extends StatefulWidget {
 }
 
 class _PlumeDetailsScreenState extends State<PlumeDetailsScreen> {
-  var nameController = TextEditingController();
+  var idController = TextEditingController();
   var locationController = TextEditingController();
 
   @override
   void initState() {
     if (widget.plume != null) {
-      nameController.text = widget.plume!.name;
+      idController.text = widget.plume!.id.toString();
       locationController.text = widget.plume!.location;
     }
     super.initState();
@@ -29,7 +29,6 @@ class _PlumeDetailsScreenState extends State<PlumeDetailsScreen> {
     return GestureDetector(
       onTap: () => catchFocus(context),
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text(
             widget.plume == null ? "Добавить шлейф" : "Изменить шлейф",
@@ -42,7 +41,7 @@ class _PlumeDetailsScreenState extends State<PlumeDetailsScreen> {
         ),
         body: SingleChildScrollView(
           padding: kDetailScreenPadding,
-          physics: ClampingScrollPhysics(),
+          physics: kDefaultPhysics,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -53,10 +52,10 @@ class _PlumeDetailsScreenState extends State<PlumeDetailsScreen> {
                   color: Theme.of(context).textTheme.bodyText1?.color,
                   fontWeight: FontWeight.w600,
                 ),
-                controller: nameController,
+                controller: idController,
                 keyboardType: TextInputType.name,
                 decoration: InputDecoration(
-                  labelText: "Название",
+                  labelText: "Идентификатор",
                   labelStyle: TextStyle(
                     fontSize: 18,
                     color: Theme.of(context).textTheme.bodyText2?.color,

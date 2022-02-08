@@ -18,10 +18,18 @@ class ImageSeletor {
     return null;
   }
 
-  Future<List<File>?> _pickImagesFromGallery() async {
+  Future<List<File>?> _pickImagesFromGallery(bool pickMulti) async {
     try {
       final _picker = ImagePicker();
-      var pickedFileList = await _picker.pickMultiImage();
+      List<XFile>? pickedFileList = [];
+      if (pickMulti) {
+        pickedFileList = await _picker.pickMultiImage();
+      } else {
+        var file = await _picker.pickImage(source: ImageSource.gallery);
+        if (file != null) {
+          pickedFileList.add(file);
+        }
+      }
       return pickedFileList == null
           ? null
           : List.of(pickedFileList.map((e) => File(e.path)));
@@ -30,7 +38,12 @@ class ImageSeletor {
     }
   }
 
-  Future<List<MultiImage>> select(BuildContext context) async {
+  Future<List<MultiImage>> select({
+    required BuildContext context,
+    bool multiFormGallery = true,
+  }) async {
+    final _cameraPickerInProgress = ValueNotifier<bool>(false);
+    final _galleryPickerInProgress = ValueNotifier<bool>(false);
     List<File> myFiles = [];
     await showModalBottomSheet(
       context: context,
@@ -61,32 +74,60 @@ class ImageSeletor {
               ),
             ),
           ),
-          ListTile(
-            leading: Icon(
-              Icons.camera_alt,
-              color: secondaryColor,
-            ),
-            title: Text("С камеры"),
-            onTap: () async {
-              var file = await _pickImageFromCamera();
-              if (file != null) {
-                myFiles.add(file);
-              }
-              Navigator.pop(context);
+          ValueListenableBuilder<bool>(
+            valueListenable: _cameraPickerInProgress,
+            builder: (context, inProgress, child) {
+              return ListTile(
+                leading: Visibility(
+                  visible: inProgress,
+                  child: SizedBox(
+                    width: 24,
+                    height: 24,
+                    child: CircularProgressIndicator.adaptive(),
+                  ),
+                  replacement: Icon(
+                    Icons.camera_alt,
+                    color: secondaryColor,
+                  ),
+                ),
+                title: Text("С камеры"),
+                onTap: () async {
+                  _cameraPickerInProgress.value = true;
+                  await _pickImageFromCamera().then((file) {
+                    if (file != null) myFiles.add(file);
+                  }).whenComplete(() => _cameraPickerInProgress.value = true);
+                  Navigator.pop(context);
+                },
+              );
             },
           ),
-          ListTile(
-            leading: Icon(
-              Icons.photo_library,
-              color: secondaryColor,
-            ),
-            title: Text("Из галереи"),
-            onTap: () async {
-              var files = await _pickImagesFromGallery();
-              if (files != null) {
-                myFiles = List.of(files.map((e) => File(e.path)));
-              }
-              Navigator.pop(context);
+          ValueListenableBuilder<bool>(
+            valueListenable: _galleryPickerInProgress,
+            builder: (context, inProgress, child) {
+              return ListTile(
+                leading: Visibility(
+                  visible: inProgress,
+                  child: SizedBox(
+                    width: 24,
+                    height: 24,
+                    child: CircularProgressIndicator.adaptive(),
+                  ),
+                  replacement: Icon(
+                    Icons.photo_library,
+                    color: secondaryColor,
+                  ),
+                ),
+                title: Text("Из галереи"),
+                onTap: () async {
+                  _galleryPickerInProgress.value = true;
+                  await _pickImagesFromGallery(multiFormGallery).then((files) {
+                    if (files != null) {
+                      myFiles = List.of(files.map((e) => File(e.path)));
+                    }
+                  }).whenComplete(() => _galleryPickerInProgress.value = false);
+                  Navigator.pop(context);
+                },
+              );
             },
           ),
           SizedBox(height: 24)

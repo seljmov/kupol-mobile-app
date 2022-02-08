@@ -12,7 +12,7 @@ class ImageSelectButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () async {
-        var pickFiles = await ImageSeletor().select(context);
+        var pickFiles = await ImageSeletor().select(context: context);
         imagesFiles.value += List.of(pickFiles);
       },
       child: SvgPicture.asset(

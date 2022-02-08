@@ -69,7 +69,7 @@ class AddEventScreen extends StatelessWidget {
         ),
         body: SingleChildScrollView(
           padding: kDetailScreenPadding,
-          physics: ClampingScrollPhysics(),
+          physics: kDefaultPhysics,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,

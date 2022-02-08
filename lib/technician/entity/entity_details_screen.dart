@@ -83,7 +83,7 @@ class EntityDetailsScreen extends StatelessWidget {
               Expanded(
                 child: SingleChildScrollView(
                   padding: kDetailScreenPadding,
-                  physics: ClampingScrollPhysics(),
+                  physics: kDefaultPhysics,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
@@ -250,8 +250,8 @@ class EntityDetailsScreen extends StatelessWidget {
                                   visible: isEditable,
                                   child: GestureDetector(
                                     onTap: () async {
-                                      var pickFiles =
-                                          await ImageSeletor().select(context);
+                                      var pickFiles = await ImageSeletor()
+                                          .select(context: context);
                                       _imagesFiles.value += List.of(pickFiles);
                                     },
                                     child: SvgPicture.asset(
@@ -288,8 +288,11 @@ class EntityDetailsScreen extends StatelessWidget {
                                   if (photo == null)
                                     GestureDetector(
                                       onTap: () async {
-                                        var images = await ImageSeletor()
-                                            .select(context);
+                                        var images =
+                                            await ImageSeletor().select(
+                                          context: context,
+                                          multiFormGallery: false,
+                                        );
 
                                         // Может быть null, если нажали "добавить",
                                         // вышло меню с выбором, а ничего выбрано и добавлено не было
@@ -395,8 +398,11 @@ class EntityDetailsScreen extends StatelessWidget {
                                   if (photo == null)
                                     GestureDetector(
                                       onTap: () async {
-                                        var images = await ImageSeletor()
-                                            .select(context);
+                                        var images =
+                                            await ImageSeletor().select(
+                                          context: context,
+                                          multiFormGallery: false,
+                                        );
 
                                         // Может быть null, если нажали "добавить",
                                         // вышло меню с выбором, а ничего выбрано и добавлено не было

@@ -39,36 +39,30 @@ class EntityFormRepository {
 
   List<Section> _sections = [
     Section(
-      id: 0,
-      name: "123",
+      id: 1,
       location: "любой",
     ),
     Section(
-      id: 1,
-      name: "456",
+      id: 2,
       location: "Шкаф серверный",
     ),
     Section(
-      id: 2,
-      name: "789",
+      id: 3,
       location: "Банкомат+терминал",
     ),
   ];
 
   List<Plume> _plumes = [
     Plume(
-      id: 0,
-      name: "123",
+      id: 1,
       location: "любой",
     ),
     Plume(
-      id: 1,
-      name: "456",
+      id: 2,
       location: "Шкаф серверный",
     ),
     Plume(
-      id: 2,
-      name: "789",
+      id: 3,
       location: "Банкомат+терминал",
     ),
   ];

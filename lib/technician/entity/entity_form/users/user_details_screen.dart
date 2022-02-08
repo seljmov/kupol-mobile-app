@@ -42,7 +42,6 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
     return GestureDetector(
       onTap: () => catchFocus(context),
       child: Scaffold(
-        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text(
             widget.user == null
@@ -57,7 +56,7 @@ class _UserDetailsScreenState extends State<UserDetailsScreen> {
         ),
         body: SingleChildScrollView(
           padding: kDetailScreenPadding,
-          physics: ClampingScrollPhysics(),
+          physics: kDefaultPhysics,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.start,

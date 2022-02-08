@@ -30,7 +30,7 @@ class EntitiesScreen extends StatelessWidget {
         if (entities.isEmpty) return EmptyEntitiesScreen();
         return SingleChildScrollView(
           padding: kEventsScreenPadding,
-          physics: ClampingScrollPhysics(),
+          physics: kDefaultPhysics,
           child: Column(
             children: List.generate(entities.length, (index) {
               return Padding(
