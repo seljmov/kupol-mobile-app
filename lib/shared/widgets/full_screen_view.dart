@@ -13,9 +13,9 @@ class FullScreenView extends StatelessWidget {
         backgroundColor: Colors.black,
         appBar: AppBar(
           backgroundColor: Colors.black,
-          leading: GestureDetector(
-            onTap: () => Navigator.pop(context),
-            child: Icon(
+          leading: IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: Icon(
               Icons.arrow_back_ios_new_rounded,
               color: Colors.white,
             ),

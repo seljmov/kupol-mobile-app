@@ -153,14 +153,16 @@ class PlumesScreen extends StatelessWidget {
                             ],
                           ),
                         ),
-                        GestureDetector(
-                          onTap: () async {
+                        IconButton(
+                          onPressed: () async {
                             _showMoreBottomSheet(
                               context: context,
                               plume: plumes[index],
                             );
                           },
-                          child: SvgPicture.asset("lib/assets/icons/more.svg"),
+                          icon: SvgPicture.asset(
+                            "lib/assets/icons/more.svg",
+                          ),
                         ),
                       ],
                     ),

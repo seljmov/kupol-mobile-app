@@ -200,18 +200,24 @@ class UsersScreen extends StatelessWidget {
                                               onTap: () {
                                                 pinNotifier.value = !isHidden;
                                               },
-                                              child: Text(
-                                                !isHidden
-                                                    ? "${users[index].pin}"
-                                                    : "Показать",
-                                                style: TextStyle(
-                                                  fontSize: 14,
-                                                  color: !isHidden
-                                                      ? Theme.of(context)
-                                                          .textTheme
-                                                          .bodyText1
-                                                          ?.color
-                                                      : secondaryColor,
+                                              child: Visibility(
+                                                visible: isHidden,
+                                                child: Text(
+                                                  "Показать",
+                                                  style: TextStyle(
+                                                    fontSize: 14,
+                                                    color: secondaryColor,
+                                                  ),
+                                                ),
+                                                replacement: Text(
+                                                  "${users[index].pin}",
+                                                  style: TextStyle(
+                                                    fontSize: 14,
+                                                    color: Theme.of(context)
+                                                        .textTheme
+                                                        .bodyText1
+                                                        ?.color,
+                                                  ),
                                                 ),
                                               ),
                                             ),
@@ -225,15 +231,17 @@ class UsersScreen extends StatelessWidget {
                             ],
                           ),
                         ),
-                        GestureDetector(
-                          onTap: () async {
+                        IconButton(
+                          onPressed: () async {
                             await _showMoreBottomSheet(
                               context: context,
                               user: users[index],
                             );
                             //await showCreateUserBottomSheet(context);
                           },
-                          child: SvgPicture.asset("lib/assets/icons/more.svg"),
+                          icon: SvgPicture.asset(
+                            "lib/assets/icons/more.svg",
+                          ),
                         ),
                       ],
                     ),

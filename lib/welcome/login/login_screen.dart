@@ -85,7 +85,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => FocusScope.of(context).requestFocus(FocusNode()),
+      onTap: () => catchFocus(context),
       child: Scaffold(
         resizeToAvoidBottomInset: false,
         body: Padding(

@@ -112,17 +112,15 @@ class ProfileScreen extends StatelessWidget {
               leading: Visibility(
                 visible: isEditable,
                 child: IconButton(
-                  onPressed: () {
-                    _editableNotifier.value = false;
-                  },
+                  onPressed: () => _editableNotifier.value = false,
                   icon: Icon(
                     Icons.close_rounded,
                     color: Colors.redAccent,
                   ),
                 ),
-                replacement: GestureDetector(
-                  onTap: () => Navigator.pop(context),
-                  child: Icon(Icons.arrow_back_ios_new_rounded),
+                replacement: IconButton(
+                  onPressed: () => Navigator.pop(context),
+                  icon: Icon(Icons.arrow_back_ios_new_rounded),
                 ),
               ),
               actions: [

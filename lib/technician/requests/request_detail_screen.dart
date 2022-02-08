@@ -16,9 +16,9 @@ class RequestDetailScreen extends StatelessWidget {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text("Подробности заявки"),
-        leading: GestureDetector(
-          onTap: () => Navigator.pop(context),
-          child: Icon(
+        leading: IconButton(
+          onPressed: () => Navigator.pop(context),
+          icon: Icon(
             Icons.arrow_back_ios_new_rounded,
           ),
         ),

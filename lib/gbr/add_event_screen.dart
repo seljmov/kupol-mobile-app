@@ -40,9 +40,9 @@ class AddEventScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: Text("Новое событие"),
-          leading: GestureDetector(
-            onTap: () => Navigator.pop(context),
-            child: Icon(
+          leading: IconButton(
+            onPressed: () => Navigator.pop(context),
+            icon: Icon(
               Icons.close_rounded,
               color: Colors.redAccent,
             ),
@@ -53,9 +53,9 @@ class AddEventScreen extends StatelessWidget {
               builder: (context, canCreate, child) {
                 return Padding(
                   padding: const EdgeInsets.only(right: 20),
-                  child: GestureDetector(
-                    onTap: !canCreate ? null : () => Navigator.pop(context),
-                    child: Icon(
+                  child: IconButton(
+                    onPressed: !canCreate ? null : () => Navigator.pop(context),
+                    icon: Icon(
                       Icons.check_rounded,
                       color: !canCreate
                           ? Theme.of(context).textTheme.bodyText2?.color
