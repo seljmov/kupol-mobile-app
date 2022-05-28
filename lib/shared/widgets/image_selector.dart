@@ -36,6 +36,7 @@ class ImageSeletor {
     } catch (e) {
       print("_pickImagesFromGallery() -> e -> $e");
     }
+    return null;
   }
 
   Future<List<MultiImage>> select({
